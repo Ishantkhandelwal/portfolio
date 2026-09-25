@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGradDrop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090910" />
+      <stop offset="100%" stop-color="#121324" />
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#d946ef" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#bgGradDrop)" />
+  <rect x="0" y="0" width="1200" height="750" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
+
+  <!-- Top App Navigation -->
+  <rect x="30" y="25" width="1140" height="60" rx="10" fill="#141426" stroke="rgba(139,92,246,0.3)" stroke-width="1.5" />
+  <circle cx="58" cy="55" r="8" fill="#8b5cf6" />
+  <text x="78" y="60" fill="#ffffff" font-family="'Space Mono', monospace" font-size="16" font-weight="bold">AI DROPOUT RISK INTELLIGENCE // STREAMLIT PREDICTIVE SUITE</text>
+  <text x="800" y="60" fill="#a78bfa" font-family="'Space Mono', monospace" font-size="13">PYTHON • SCIKIT-LEARN • EXPLAINABLE AI</text>
+
+  <!-- Left Column: Student Risk Assessment -->
+  <g transform="translate(30, 105)">
+    <rect width="480" height="610" rx="14" fill="#131422" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+    <text x="30" y="40" fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="700">Student Risk Diagnostics</text>
+    <text x="30" y="62" fill="#94a3b8" font-family="'Space Mono', monospace" font-size="11">REAL-TIME MULTI-FACTOR PROBABILITY ENGINE</text>
+
+    <!-- Risk Gauge Circle -->
+    <g transform="translate(240, 200)">
+      <circle cx="0" cy="0" r="105" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="16" stroke-dasharray="660" />
+      <circle cx="0" cy="0" r="105" fill="none" stroke="#f43f5e" stroke-width="16" stroke-dasharray="660" stroke-dashoffset="210" stroke-linecap="round" />
+      <text x="0" y="8" fill="#f43f5e" font-family="system-ui, sans-serif" font-size="44" font-weight="800" text-anchor="middle">78.4%</text>
+      <text x="0" y="36" fill="#94a3b8" font-family="'Space Mono', monospace" font-size="12" text-anchor="middle">DROPOUT PROBABILITY</text>
+      <rect x="-65" y="55" width="130" height="26" rx="6" fill="rgba(244,63,94,0.2)" />
+      <text x="0" y="72" fill="#f43f5e" font-family="'Space Mono', monospace" font-size="11" font-weight="bold" text-anchor="middle">CRITICAL DANGER</text>
+    </g>
+
+    <!-- Student Metadata Box -->
+    <g transform="translate(30, 350)">
+      <rect width="420" height="230" rx="10" fill="#0c0d16" stroke="rgba(255,255,255,0.06)" />
+      <text x="20" y="32" fill="#a78bfa" font-family="'Space Mono', monospace" font-size="12" font-weight="bold">ACTIVE PROFILE TELEMETRY</text>
+
+      <text x="20" y="65" fill="#94a3b8" font-family="'Space Mono', monospace" font-size="11">STUDENT ID:</text>
+      <text x="200" y="65" fill="#ffffff" font-family="'Space Mono', monospace" font-size="11">#STU-88204 (Semester 3)</text>
+
+      <text x="20" y="95" fill="#94a3b8" font-family="'Space Mono', monospace" font-size="11">ATTENDANCE RATE:</text>
+      <text x="200" y="95" fill="#f43f5e" font-family="'Space Mono', monospace" font-size="11">54.2% (Below 75% threshold)</text>
+
+      <text x="20" y="125" fill="#94a3b8" font-family="'Space Mono', monospace" font-size="11">ASSIGNMENT SUBMISSIONS:</text>
+      <text x="200" y="125" fill="#fbbf24" font-family="'Space Mono', monospace" font-size="11">3 / 8 completed</text>
+
+      <text x="20" y="155" fill="#94a3b8" font-family="'Space Mono', monospace" font-size="11">MID-TERM MARKS:</text>
+      <text x="200" y="155" fill="#f43f5e" font-family="'Space Mono', monospace" font-size="11">38% (Academic Warning)</text>
+
+      <text x="20" y="185" fill="#94a3b8" font-family="'Space Mono', monospace" font-size="11">RECOMMENDED ACTION:</text>
+      <text x="200" y="185" fill="#38bdf8" font-family="'Space Mono', monospace" font-size="11">Trigger Advisor Intervention</text>
+    </g>
+  </g>
+
+  <!-- Right Column: Institutional Cohort Monitoring & Feature Importance -->
+  <g transform="translate(530, 105)">
+    <!-- Top Card: Cohort Monitoring -->
+    <rect width="640" height="260" rx="14" fill="#131422" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+    <text x="30" y="40" fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="700">Institutional Cohort Batch Distribution</text>
+    <text x="30" y="62" fill="#94a3b8" font-family="'Space Mono', monospace" font-size="11">SCIKIT-LEARN ML CLASSIFICATION MODEL</text>
+
+    <!-- Stats -->
+    <g transform="translate(30, 95)">
+      <rect width="180" height="130" rx="10" fill="#0d0e1a" stroke="rgba(16,185,129,0.3)" />
+      <text x="20" y="32" fill="#10b981" font-family="'Space Mono', monospace" font-size="11">LOW RISK</text>
+      <text x="20" y="75" fill="#ffffff" font-family="system-ui, sans-serif" font-size="36" font-weight="800">74%</text>
+      <text x="20" y="105" fill="#94a3b8" font-family="'Space Mono', monospace" font-size="11">1,240 Students</text>
+    </g>
+
+    <g transform="translate(230, 95)">
+      <rect width="180" height="130" rx="10" fill="#0d0e1a" stroke="rgba(251,191,36,0.3)" />
+      <text x="20" y="32" fill="#fbbf24" font-family="'Space Mono', monospace" font-size="11">MODERATE RISK</text>
+      <text x="20" y="75" fill="#ffffff" font-family="system-ui, sans-serif" font-size="36" font-weight="800">18%</text>
+      <text x="20" y="105" fill="#94a3b8" font-family="'Space Mono', monospace" font-size="11">302 Students</text>
+    </g>
+
+    <g transform="translate(430, 95)">
+      <rect width="180" height="130" rx="10" fill="#0d0e1a" stroke="rgba(244,63,94,0.4)" />
+      <text x="20" y="32" fill="#f43f5e" font-family="'Space Mono', monospace" font-size="11">CRITICAL DANGER</text>
+      <text x="20" y="75" fill="#f43f5e" font-family="system-ui, sans-serif" font-size="36" font-weight="800">8%</text>
+      <text x="20" y="105" fill="#f43f5e" font-family="'Space Mono', monospace" font-size="11">134 Students</text>
+    </g>
+
+    <!-- Bottom Card: Explainable AI Driver Breakdown -->
+    <g transform="translate(0, 280)">
+      <rect width="640" height="330" rx="14" fill="#131422" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+      <text x="30" y="40" fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="700">Explainable AI (XAI) Feature Importance Drivers</text>
+      <text x="30" y="62" fill="#94a3b8" font-family="'Space Mono', monospace" font-size="11">SHAP-ALIGNED RELATIVE CONTRIBUTION METRICS</text>
+
+      <!-- Bar 1: Attendance -->
+      <g transform="translate(30, 95)">
+        <text x="0" y="16" fill="#e2e8f0" font-family="'Space Mono', monospace" font-size="12">Lecture &amp; Lab Attendance Deficit</text>
+        <rect x="0" y="26" width="580" height="12" rx="6" fill="rgba(255,255,255,0.05)" />
+        <rect x="0" y="26" width="460" height="12" rx="6" fill="#f43f5e" />
+        <text x="580" y="16" fill="#f43f5e" font-family="'Space Mono', monospace" font-size="12" text-anchor="end">+42.8% Impact</text>
+      </g>
+
+      <!-- Bar 2: Continuous Assessment -->
+      <g transform="translate(30, 160)">
+        <text x="0" y="16" fill="#e2e8f0" font-family="'Space Mono', monospace" font-size="12">Internal Marks &amp; Exam Performance</text>
+        <rect x="0" y="26" width="580" height="12" rx="6" fill="rgba(255,255,255,0.05)" />
+        <rect x="0" y="26" width="370" height="12" rx="6" fill="#a855f7" />
+        <text x="580" y="16" fill="#a855f7" font-family="'Space Mono', monospace" font-size="12" text-anchor="end">+28.5% Impact</text>
+      </g>
+
+      <!-- Bar 3: Assignment Delays -->
+      <g transform="translate(30, 225)">
+        <text x="0" y="16" fill="#e2e8f0" font-family="'Space Mono', monospace" font-size="12">Unsubmitted Project Deliverables</text>
+        <rect x="0" y="26" width="580" height="12" rx="6" fill="rgba(255,255,255,0.05)" />
+        <rect x="0" y="26" width="240" height="12" rx="6" fill="#38bdf8" />
+        <text x="580" y="16" fill="#38bdf8" font-family="'Space Mono', monospace" font-size="12" text-anchor="end">+18.2% Impact</text>
+      </g>
+    </g>
+  </g>
+</svg>

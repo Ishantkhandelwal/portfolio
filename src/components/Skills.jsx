@@ -6,51 +6,51 @@ import MaskedTitle from './MaskedTitle';
 const categories = [
   {
     id: '01',
-    tag: 'CORE UI ENGINEERING',
-    title: 'Frontend & UI Craft (Hands-On)',
-    summary: 'Responsive layouts, component structure, clean styling, and high-fidelity user experiences.',
-    telemetry: '80% Proficiency • Pixel Precision',
-    skills: ['HTML5', 'CSS3 Layouts', 'Tailwind CSS', 'Responsive UI', 'JavaScript Basics', 'React Basics']
+    tag: 'CORE ANALYTICS',
+    title: 'Data Analytics & Preprocessing',
+    summary: 'End-to-end data preparation, outlier detection, missing value imputation, and exploratory data analysis.',
+    telemetry: 'Pandas • NumPy • Feature Scaling',
+    skills: ['Pandas', 'NumPy', 'Exploratory Data Analysis (EDA)', 'Data Preprocessing', 'Data Cleaning', 'Statistical Modeling']
   },
   {
     id: '02',
-    tag: 'AI-AUGMENTED ENGINEERING',
-    title: 'Generative AI & Prompt Design',
-    summary: 'Architecting precision prompt schemas, directing LLMs for code synthesis, and sub-second streaming.',
-    telemetry: 'Gemini API • Prompt Schemas',
-    skills: ['Prompt Engineering', 'AI-Augmented Coding', 'Google Gemini API', 'Token Streaming', 'Code Synthesis', 'Rapid Sprints']
+    tag: 'PREDICTIVE ML & XAI',
+    title: 'Machine Learning & Explainable AI',
+    summary: 'Supervised learning algorithms, predictive regression models, real-time risk classification, and XAI feature importance.',
+    telemetry: 'Scikit-learn • XAI Feature Importance',
+    skills: ['Scikit-learn', 'Linear Regression', 'Risk Classification', 'Explainable AI (XAI)', 'Model Evaluation', 'Streamlit']
   },
   {
     id: '03',
-    tag: 'SYSTEM ARCHITECTURE',
-    title: 'System Design & Data Flows',
-    summary: 'Decoupled presentation layers, client-server models, RESTful contracts, and WebSocket protocols.',
-    telemetry: 'Decoupled Edge • Sub-85ms TTFB',
-    skills: ['Decoupled Architecture', 'System Design', 'RESTful APIs', 'WebSocket Flows', 'Data Contracts', 'Authentication PKCE']
+    tag: 'VISUAL TELEMETRY',
+    title: 'Business Intelligence & Dashboards',
+    summary: 'Interactive executive dashboards, automated ETL dataflows in Power Query, custom DAX measures, and dynamic KPI cards.',
+    telemetry: 'Power BI • Tableau • DAX Measures',
+    skills: ['Power BI', 'DAX Measures', 'Power Query ETL', 'Tableau', 'Microsoft Excel', 'Matplotlib & Seaborn']
   },
   {
     id: '04',
-    tag: 'EDGE & CLOUD RUNTIMES',
-    title: 'Cloud & Edge Deployments',
-    summary: 'Edge-distributed static hosting, continuous deployment, serverless edge workers, and DNS routing.',
-    telemetry: 'Cloudflare Pages • Edge Workers',
-    skills: ['Cloudflare Pages', 'Cloudflare Workers', 'Vercel', 'Git', 'GitHub', 'CI/CD Deployments']
+    tag: 'DATA ARCHITECTURE',
+    title: 'Database Systems & Data Modeling',
+    summary: 'Relational schema design, normalization, complex query optimization, joins, aggregations, and data integrity.',
+    telemetry: 'SQL • Relational Schemas • DBMS Part-2',
+    skills: ['SQL', 'DBMS', 'Relational Schemas', 'Query Optimization', 'Complex Joins', 'Aggregations']
   },
   {
     id: '05',
-    tag: 'FRAMEWORKS DIRECTED WITH AI',
-    title: 'Full-Stack Frameworks',
-    summary: 'Frameworks architected and synthesized using modern AI-assisted engineering workflows.',
-    telemetry: 'AI-Accelerated • Full Stack',
-    skills: ['Next.js', 'Node.js', 'Express.js', 'Socket.io', 'MongoDB Atlas', 'PostgreSQL • Prisma']
+    tag: 'CODE FOUNDATIONS',
+    title: 'Programming Foundations',
+    summary: 'Algorithmic problem solving, object-oriented design patterns, and versatile multi-language software engineering.',
+    telemetry: 'Python • Java • C++ • C',
+    skills: ['Python', 'Java (OOP)', 'C++', 'C', 'Data Structures', 'Algorithm Design']
   },
   {
     id: '06',
-    tag: 'PROBLEM SOLVING CORE',
-    title: 'Programming Foundations',
-    summary: 'Foundational computer science principles, OOP concepts, algorithm basics, and schema comprehension.',
-    telemetry: 'OOP Basics • Schema Design',
-    skills: ['Java (OOP)', 'JavaScript Foundations', 'Python Basics', 'Database Concepts', 'Data Structures Basics']
+    tag: 'PROFESSIONAL PRACTICE',
+    title: 'Analytical Problem Solving & Delivery',
+    summary: 'Structured problem solving, cross-functional collaboration, agile time management, and clear technical documentation.',
+    telemetry: 'Adaptability • Time Management • Team Collaboration',
+    skills: ['Problem-solving', 'Team Collaboration', 'Time Management', 'Adaptability', 'Technical Documentation', 'Critical Thinking']
   }
 ];
 
@@ -78,7 +78,24 @@ export default function Skills() {
     isPausedRef.current = isPaused;
   }, [isPaused]);
 
-  // Continuous auto-run animation loop
+  const isVisibleRef = useRef(true);
+
+  // Pause orbital animation when scrolled out of viewport
+  useEffect(() => {
+    const el = carouselStageRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Continuous auto-run animation loop (only executes when visible)
   useEffect(() => {
     let animId;
     let lastTime = performance.now();
@@ -87,28 +104,28 @@ export default function Skills() {
       const delta = (currentTime - lastTime) / 1000;
       lastTime = currentTime;
 
-      if (!isPausedRef.current && !isDraggingRef.current) {
-        // Continuous running speed: ~20 degrees per second (smooth, lively ~18s full ring cycle)
+      if (isVisibleRef.current && !isPausedRef.current && !isDraggingRef.current) {
+        // Continuous running speed: ~20 degrees per second
         angleRef.current = (angleRef.current + delta * 20) % 360;
         setRotationAngle(angleRef.current);
-      }
 
-      // Calculate which card is closest to the front (cos(angle) is maximized at 0 / 360)
-      let closestIdx = 0;
-      let minDiff = 360;
+        // Calculate which card is closest to the front
+        let closestIdx = 0;
+        let minDiff = 360;
 
-      for (let i = 0; i < totalCards; i++) {
-        let diff = ((i * angleStep - angleRef.current) % 360 + 360) % 360;
-        if (diff > 180) diff = 360 - diff;
-        if (diff < minDiff) {
-          minDiff = diff;
-          closestIdx = i;
+        for (let i = 0; i < totalCards; i++) {
+          let diff = ((i * angleStep - angleRef.current) % 360 + 360) % 360;
+          if (diff > 180) diff = 360 - diff;
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestIdx = i;
+          }
         }
-      }
 
-      if (closestIdx !== lastActiveIndexRef.current) {
-        lastActiveIndexRef.current = closestIdx;
-        setActiveCardIndex(closestIdx);
+        if (closestIdx !== lastActiveIndexRef.current) {
+          lastActiveIndexRef.current = closestIdx;
+          setActiveCardIndex(closestIdx);
+        }
       }
 
       animId = requestAnimationFrame(loop);

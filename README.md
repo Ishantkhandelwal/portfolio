@@ -1,4 +1,4 @@
-# Dinesh — AI-Native Full Stack Developer & System Architect Portfolio
+# Ishant Khandelwal — Data Analyst & Machine Learning Developer Portfolio
 
 [![React 19](https://img.shields.io/badge/React-19.2-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![Vite 8](https://img.shields.io/badge/Vite-8.0_(Rolldown)-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
@@ -7,9 +7,7 @@
 [![Cloudflare Workers](https://img.shields.io/badge/Cloudflare_Workers-Edge_Runtime-F38020?logo=cloudflare)](https://workers.cloudflare.com/)
 [![Lenis Scroll](https://img.shields.io/badge/Lenis-Smooth_Scroll-black)](https://github.com/darkroomengineering/lenis)
 
-A high-performance, creative agency-grade developer portfolio architected with **React 19**, custom **WebGL GLSL shaders**, **GSAP ScrollTrigger**, and smooth momentum physics. Deployed globally to **Cloudflare Workers** with edge-native serverless microservices.
-
-**Live Production URL:** [https://dinesh-portfolio.pages.dev](https://dinesh-portfolio.pages.dev)
+A high-performance, creative agency-grade developer portfolio for **Ishant Khandelwal**, specializing in **Data Analytics**, **Machine Learning**, **Business Intelligence (Power BI & Tableau)**, and **Predictive Modeling**. Architected with **React 19**, custom **WebGL GLSL shaders**, **GSAP ScrollTrigger**, and smooth momentum physics. Deployed globally with edge-native serverless microservices.
 
 ---
 
@@ -103,7 +101,7 @@ portfolio/
 ├── functions/                     # Legacy Cloudflare Pages Functions (if needed)
 ├── public/                        # Static edge assets
 │   ├── screenshots/               # High-res UI documentation screenshots
-│   ├── Dinesh_Resume.pdf          # Professional resume
+│   ├── Ishant_Resume.pdf          # Professional resume
 │   ├── favicon.svg                # Vector brand favicon
 │   └── og-image.jpg               # OpenGraph social share card
 ├── src/
@@ -160,8 +158,8 @@ portfolio/
 Clone the repository and install project dependencies:
 
 ```bash
-git clone https://github.com/DineshS36/Portfolio-.git
-cd Portfolio-
+git clone https://github.com/Ishantkhandelwal/portfolio.git
+cd portfolio
 npm install
 ```
 
@@ -218,17 +216,16 @@ npm run secret:resend
 
 ## 👨‍💻 Author & Engineering Channels
 
-**Dinesh S**  
-*AI-Native Full Stack Developer & 4th-Year AIML Student*
+**Ishant Khandelwal**  
+*Data Analyst & Machine Learning Developer • B.Tech CSE (Lovely Professional University)*
 
-- **Live Portfolio:** [dinesh-portfolio.pages.dev](https://dinesh-portfolio.pages.dev)
-- **GitHub:** [@DineshS36](https://github.com/DineshS36)
-- **LinkedIn:** [dinesh-s-173698390](https://www.linkedin.com/in/dinesh-s-173698390)
-- **WhatsApp:** [+91 93453 80487](https://wa.me/919345380487?text=Hi%20Dinesh,%20saw%20your%20portfolio%20and%20wanted%20to%20connect!)
-- **Direct Email:** [itsdinesh036@gmail.com](mailto:itsdinesh036@gmail.com)
+- **GitHub:** [@Ishantkhandelwal](https://github.com/Ishantkhandelwal)
+- **LinkedIn:** [ishantkhandelwal](https://www.linkedin.com/in/ishantkhandelwal)
+- **WhatsApp:** [+91 78500 71684](https://wa.me/917850071684?text=Hi%20Ishant,%20saw%20your%20portfolio%20and%20wanted%20to%20connect!)
+- **Direct Email:** [ishantkhandelwal01@gmail.com](mailto:ishantkhandelwal01@gmail.com)
 
 ---
 
 <div align="center">
-  <sub>© 2026 Dinesh. Designed with architectural precision and creative excellence.</sub>
+  <sub>© 2026 Ishant Khandelwal. Designed with architectural precision and creative excellence.</sub>
 </div>

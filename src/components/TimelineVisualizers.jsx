@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 
 // ============================================================================
-// STAGE 01: Dec 2025 – Mar 2026 Web Foundations & Core Logic
-// Clean DOM Tree Hierarchy, CSS Cascade Rule Inspector & Event Dispatcher
+// STAGE 01: Aug 2024 – Present: Computer Science & Data Modeling Foundations
+// Relational Schema Hierarchy & SQL Query Execution Telemetry
 // ============================================================================
 export function WebArchitectureCanvas({ isActive = true }) {
   const canvasRef = useRef(null);
@@ -38,39 +38,39 @@ export function WebArchitectureCanvas({ isActive = true }) {
     const ro = new ResizeObserver(resize);
     ro.observe(parent);
 
-    // DOM Tree Nodes
-    const domNodes = [
-      { id: 'html', label: '<HTML>', x: 0.5, y: 0.20, children: ['body'] },
-      { id: 'body', label: '<BODY>', x: 0.5, y: 0.44, children: ['nav', 'main', 'btn'] },
-      { id: 'nav', label: '<NAV>', x: 0.22, y: 0.70, children: [] },
-      { id: 'main', label: '<MAIN.APP>', x: 0.5, y: 0.70, children: [] },
-      { id: 'btn', label: '<BUTTON#action>', x: 0.78, y: 0.70, children: [] }
+    // Schema Tables
+    const schemaNodes = [
+      { id: 'dbms', label: 'DATABASE_ENGINE', x: 0.5, y: 0.20, children: ['students', 'analytics'] },
+      { id: 'students', label: 'STUDENT_RECORDS', x: 0.26, y: 0.46, children: ['queries', 'indexes'] },
+      { id: 'analytics', label: 'ANALYTICS_DATA', x: 0.74, y: 0.46, children: ['models'] },
+      { id: 'queries', label: 'OPTIMIZED_SQL', x: 0.18, y: 0.72, children: [] },
+      { id: 'indexes', label: 'B-TREE_INDEX', x: 0.45, y: 0.72, children: [] },
+      { id: 'models', label: 'RELATIONAL_SCHEMA', x: 0.78, y: 0.72, children: [] }
     ];
 
-    const cssRules = [
-      'display: flex; gap: 1.5rem;',
-      'border-radius: 999px; backdrop-filter: blur(16px);',
-      'color: #ffffff; letter-spacing: 0.04em;',
-      'transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);',
-      'grid-template-columns: repeat(3, 1fr);'
+    const sqlQueries = [
+      'SELECT id, risk_score FROM cohorts WHERE risk_tier = "CRITICAL";',
+      'EXPLAIN ANALYZE SELECT * FROM transactions WHERE ip_risk > 80;',
+      'CREATE INDEX idx_student_perf ON academics(attendance, gpa);',
+      'INNER JOIN district_stats ON state.code = district_stats.code;'
     ];
 
     let frame = 0;
 
     const render = () => {
       animId = requestAnimationFrame(render);
-
+      if (!isActiveRef.current) return;
       frame++;
       ctx.clearRect(0, 0, width, height);
 
-      // 1. Draw Clean Static DOM Tree Connectors
+      // Draw Connection Lines
       ctx.lineWidth = 1;
-      domNodes.forEach((node) => {
+      schemaNodes.forEach((node) => {
         const nx = node.x * width;
         const ny = node.y * height;
 
         node.children.forEach((cid) => {
-          const child = domNodes.find((n) => n.id === cid);
+          const child = schemaNodes.find((n) => n.id === cid);
           if (child) {
             const cx = child.x * width;
             const cy = child.y * height;
@@ -84,17 +84,17 @@ export function WebArchitectureCanvas({ isActive = true }) {
         });
       });
 
-      // 2. Draw Clean DOM Nodes (No moving particles, no flashing)
-      domNodes.forEach((node, idx) => {
+      // Draw Schema Boxes
+      schemaNodes.forEach((node, idx) => {
         const nx = node.x * width;
         const ny = node.y * height;
         const isRoot = idx === 0;
 
-        const boxW = Math.min(96, width * 0.24);
+        const boxW = Math.min(108, width * 0.27);
         const boxH = 26;
 
-        ctx.fillStyle = isRoot ? 'rgba(28, 30, 42, 0.95)' : 'rgba(14, 14, 20, 0.9)';
-        ctx.strokeStyle = isRoot ? 'rgba(56, 189, 248, 0.5)' : 'rgba(255, 255, 255, 0.18)';
+        ctx.fillStyle = isRoot ? 'rgba(28, 30, 44, 0.95)' : 'rgba(14, 15, 22, 0.9)';
+        ctx.strokeStyle = isRoot ? 'rgba(56, 189, 248, 0.6)' : 'rgba(255, 255, 255, 0.16)';
         ctx.lineWidth = 1;
 
         ctx.beginPath();
@@ -102,24 +102,24 @@ export function WebArchitectureCanvas({ isActive = true }) {
         ctx.fill();
         ctx.stroke();
 
-        ctx.font = '9px "Space Mono", monospace';
+        ctx.font = '8.5px "Space Mono", monospace';
         ctx.fillStyle = isRoot ? '#38bdf8' : '#e2e8f0';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText(node.label, nx, ny);
       });
 
-      // 3. Clean Status Telemetry Footer
-      const footerY = height - 18;
+      // Status Footer
+      const footerY = height - 16;
       ctx.font = '8.5px "Space Mono", monospace';
       ctx.textAlign = 'left';
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
-      const activeRule = cssRules[Math.floor(frame / 120) % cssRules.length];
-      ctx.fillText(`CSS CASCADE: ${activeRule}`, 16, footerY);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+      const query = sqlQueries[Math.floor(frame / 150) % sqlQueries.length];
+      ctx.fillText(`SQL: ${query}`, 16, footerY);
 
       ctx.textAlign = 'right';
       ctx.fillStyle = '#38bdf8';
-      ctx.fillText('DOM_READY • FULL_HIERARCHY', width - 16, footerY);
+      ctx.fillText('DBMS & OOP FOUNDATIONS • VERIFIED', width - 16, footerY);
     };
 
     render();
@@ -134,8 +134,8 @@ export function WebArchitectureCanvas({ isActive = true }) {
 }
 
 // ============================================================================
-// STAGE 02: June 2026 (5-Day Sprint)
-// ChatUp Full-Duplex WebSocket Message Stream & MongoDB Persistence
+// STAGE 02: May 2026: Crime Against Women Predictive Regression & Trend Modeling
+// Scatter Points, Fitted Regression Curve & Correlation Bounds
 // ============================================================================
 export function ChatUpSocketStreamCanvas({ isActive = true }) {
   const canvasRef = useRef(null);
@@ -171,21 +171,30 @@ export function ChatUpSocketStreamCanvas({ isActive = true }) {
     const ro = new ResizeObserver(resize);
     ro.observe(parent);
 
-    const chatLogs = [
-      { user: 'CLIENT', text: 'emit("chat:send", payload)', ping: '14ms', type: 'in' },
-      { user: 'SOCKET.IO', text: 'ack: 200 • broadcast("room:sync")', ping: '18ms', type: 'system' },
-      { user: 'CLIENT_2', text: 'on("chat:sync") • rendered 0-lag', ping: '16ms', type: 'out' },
-      { user: 'MONGODB', text: 'db.messages.insertOne() • saved', ping: '22ms', type: 'db' }
+    const scatterPoints = [
+      { x: 0.12, y: 0.78, color: '#38bdf8' },
+      { x: 0.18, y: 0.72, color: '#818cf8' },
+      { x: 0.28, y: 0.65, color: '#38bdf8' },
+      { x: 0.35, y: 0.58, color: '#fb7185' },
+      { x: 0.44, y: 0.52, color: '#38bdf8' },
+      { x: 0.52, y: 0.45, color: '#fb7185' },
+      { x: 0.62, y: 0.38, color: '#f43f5e' },
+      { x: 0.70, y: 0.34, color: '#fb7185' },
+      { x: 0.79, y: 0.26, color: '#f43f5e' },
+      { x: 0.88, y: 0.20, color: '#e11d48' }
     ];
+
+    let frame = 0;
 
     const render = () => {
       animId = requestAnimationFrame(render);
-
+      if (!isActiveRef.current) return;
+      frame++;
       ctx.clearRect(0, 0, width, height);
 
-      // 1. Clean Channel Header Bar
+      // Header Bar
       const headerY = 16;
-      ctx.fillStyle = 'rgba(16, 16, 22, 0.85)';
+      ctx.fillStyle = 'rgba(18, 16, 26, 0.85)';
       ctx.fillRect(16, headerY, width - 32, 28);
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
       ctx.strokeRect(16, headerY, width - 32, 28);
@@ -193,61 +202,76 @@ export function ChatUpSocketStreamCanvas({ isActive = true }) {
       ctx.font = '9px "Space Mono", monospace';
       ctx.fillStyle = '#ffffff';
       ctx.textAlign = 'left';
-      ctx.fillText('CHANNEL: #realtime-chatup', 28, headerY + 18);
+      ctx.fillText('MODEL: SCIKIT-LEARN OLS REGRESSION', 28, headerY + 18);
 
-      ctx.fillStyle = '#10b981';
+      ctx.fillStyle = '#fb7185';
       ctx.textAlign = 'right';
-      ctx.fillText('RTT: 16MS • FULL-DUPLEX ACTIVE', width - 28, headerY + 18);
+      ctx.fillText('R²: 0.864 • 7 FACTORS', width - 28, headerY + 18);
 
-      // 2. Clean Message Cards (No loading or jumpy highlights)
-      const baseY = 56;
-      const lineHeight = Math.min(38, (height - 95) / 4);
+      // Chart Area
+      const chartX = 36;
+      const chartY = 56;
+      const chartW = width - 72;
+      const chartH = height - 96;
 
-      chatLogs.forEach((item, idx) => {
-        const y = baseY + idx * lineHeight;
+      ctx.fillStyle = 'rgba(10, 10, 16, 0.85)';
+      ctx.fillRect(chartX, chartY, chartW, chartH);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+      ctx.strokeRect(chartX, chartY, chartW, chartH);
 
-        ctx.fillStyle = idx === 1 ? 'rgba(24, 26, 36, 0.85)' : 'rgba(12, 12, 16, 0.7)';
-        ctx.strokeStyle = idx === 1 ? 'rgba(56, 189, 248, 0.35)' : 'rgba(255, 255, 255, 0.08)';
-        ctx.lineWidth = 1;
-
+      // Grid lines
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+      ctx.setLineDash([4, 4]);
+      for (let i = 1; i <= 3; i++) {
+        const gy = chartY + (chartH / 4) * i;
         ctx.beginPath();
-        ctx.roundRect(16, y, width - 32, lineHeight - 6, 6);
-        ctx.fill();
+        ctx.moveTo(chartX, gy);
+        ctx.lineTo(chartX + chartW, gy);
         ctx.stroke();
+      }
+      ctx.setLineDash([]);
 
-        // User / System tag
-        ctx.font = '8.5px "Space Mono", monospace';
-        ctx.fillStyle = item.type === 'db' ? '#f59e0b' : item.type === 'system' ? '#38bdf8' : '#ffffff';
-        ctx.textAlign = 'left';
-        ctx.fillText(`[${item.user}]`, 26, y + (lineHeight - 6) / 2 + 3);
-
-        // Text Payload
-        ctx.fillStyle = '#cccccc';
-        const tagWidth = 85;
-        ctx.fillText(item.text, 26 + tagWidth, y + (lineHeight - 6) / 2 + 3);
-
-        // Ping badge
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
-        ctx.textAlign = 'right';
-        ctx.fillText(item.ping, width - 26, y + (lineHeight - 6) / 2 + 3);
-      });
-
-      // 3. Clean Event Bus Static Rule Line (No moving dot)
-      const pipeY = height - 20;
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+      // Regression Line
       ctx.beginPath();
-      ctx.moveTo(16, pipeY);
-      ctx.lineTo(width - 16, pipeY);
+      ctx.moveTo(chartX + 10, chartY + chartH - 15);
+      ctx.lineTo(chartX + chartW - 10, chartY + 15);
+      ctx.strokeStyle = '#fb7185';
+      ctx.lineWidth = 2.5;
       ctx.stroke();
 
+      // Confidence Band
+      ctx.fillStyle = 'rgba(251, 113, 133, 0.12)';
+      ctx.beginPath();
+      ctx.moveTo(chartX + 10, chartY + chartH);
+      ctx.lineTo(chartX + chartW - 10, chartY + 30);
+      ctx.lineTo(chartX + chartW - 10, chartY);
+      ctx.lineTo(chartX + 10, chartY + chartH - 30);
+      ctx.closePath();
+      ctx.fill();
+
+      // Scatter Points
+      scatterPoints.forEach((p, idx) => {
+        const px = chartX + p.x * chartW;
+        const py = chartY + p.y * chartH + Math.sin((frame + idx * 25) * 0.04) * 2;
+        ctx.beginPath();
+        ctx.arc(px, py, 4.5, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      });
+
+      // Footer
+      const footerY = height - 16;
       ctx.font = '8px "Space Mono", monospace';
       ctx.fillStyle = '#888888';
       ctx.textAlign = 'left';
-      ctx.fillText('SOCKET.IO EVENT BUS • CONNECTED', 16, pipeY + 14);
+      ctx.fillText('DISTRICT DATASETS • 28 STATES & 8 UTs', 16, footerY);
 
       ctx.textAlign = 'right';
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-      ctx.fillText('SUB-25MS LATENCY VERIFIED', width - 16, pipeY + 14);
+      ctx.fillStyle = '#fb7185';
+      ctx.fillText('PREDICTIVE TREND ENGINE', width - 16, footerY);
     };
 
     render();
@@ -262,8 +286,8 @@ export function ChatUpSocketStreamCanvas({ isActive = true }) {
 }
 
 // ============================================================================
-// STAGE 03: June 2026 (3-Day Sprint)
-// Roasting AI: Google Gemini LLM Prompt-to-Token Streaming Pipeline
+// STAGE 03: Jun 2026: AI Dropout Risk Intelligence System
+// Real-Time Probability Scoring Dial & Explainable AI (XAI) Feature Drivers
 // ============================================================================
 export function RoastingAITokenStreamCanvas({ isActive = true }) {
   const canvasRef = useRef(null);
@@ -299,25 +323,17 @@ export function RoastingAITokenStreamCanvas({ isActive = true }) {
     const ro = new ResizeObserver(resize);
     ro.observe(parent);
 
-    const roastQuotes = [
-      'Your code has more unhandled promises than a politician.',
-      'That nested loop is deeper than the Mariana Trench.',
-      'Even your linter gave up and closed the file.',
-      'Running on 99% prayers and 1% console.log().',
-      'Your git commits read like a dramatic thriller novel.'
-    ];
-
     let frame = 0;
 
     const render = () => {
       animId = requestAnimationFrame(render);
-
+      if (!isActiveRef.current) return;
       frame++;
       ctx.clearRect(0, 0, width, height);
 
-      // 1. Model Header Bar
+      // Header Bar
       const headerY = 16;
-      ctx.fillStyle = 'rgba(16, 16, 24, 0.85)';
+      ctx.fillStyle = 'rgba(16, 16, 26, 0.85)';
       ctx.fillRect(16, headerY, width - 32, 28);
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
       ctx.strokeRect(16, headerY, width - 32, 28);
@@ -325,80 +341,85 @@ export function RoastingAITokenStreamCanvas({ isActive = true }) {
       ctx.font = '9px "Space Mono", monospace';
       ctx.fillStyle = '#ffffff';
       ctx.textAlign = 'left';
-      ctx.fillText('MODEL: GOOGLE GEMINI API', 28, headerY + 18);
+      ctx.fillText('AI INFERENCE: DROPOUT RISK ENGINE', 28, headerY + 18);
 
-      ctx.fillStyle = '#818cf8';
-      ctx.fillText('[SARCASTIC_DEV]', Math.min(185, width * 0.45), headerY + 18);
-
-      ctx.fillStyle = '#10b981';
+      ctx.fillStyle = '#f43f5e';
       ctx.textAlign = 'right';
-      ctx.fillText('TTFB: < 540MS', width - 28, headerY + 18);
+      ctx.fillText('CRITICAL DANGER • 78.4%', width - 28, headerY + 18);
 
-      // 2. Streaming Output Window
-      const streamWindowY = 54;
-      const streamWindowH = height - 98;
-      ctx.fillStyle = 'rgba(10, 10, 14, 0.9)';
-      ctx.fillRect(16, streamWindowY, width - 32, streamWindowH);
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
-      ctx.strokeRect(16, streamWindowY, width - 32, streamWindowH);
+      // Left: Circular Risk Dial
+      const dialCenterX = 75;
+      const dialCenterY = 135;
+      const dialRadius = Math.min(48, height * 0.18);
 
-      // Stream Buffer Sub-Header
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
-      ctx.fillRect(16, streamWindowY, width - 32, 22);
-      ctx.font = '8px "Space Mono", monospace';
-      ctx.fillStyle = '#777777';
-      ctx.textAlign = 'left';
-      ctx.fillText('STREAM BUFFER • REAL-TIME TOKEN GENERATOR', 26, streamWindowY + 15);
+      // Background circle
+      ctx.beginPath();
+      ctx.arc(dialCenterX, dialCenterY, dialRadius, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+      ctx.lineWidth = 8;
+      ctx.stroke();
 
-      const activeRoastIdx = Math.floor(frame / 240) % roastQuotes.length;
-      const fullText = roastQuotes[activeRoastIdx];
-      const charProgress = Math.min(fullText.length, Math.floor((frame % 240) / 2));
-      const visibleText = fullText.slice(0, charProgress);
+      // Filled active arc
+      ctx.beginPath();
+      const progress = 0.784 + Math.sin(frame * 0.05) * 0.015;
+      ctx.arc(dialCenterX, dialCenterY, dialRadius, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * progress);
+      ctx.strokeStyle = '#f43f5e';
+      ctx.lineWidth = 8;
+      ctx.lineCap = 'round';
+      ctx.stroke();
 
-      // Render Streaming Text with subtle terminal cursor
-      ctx.font = '11px "Space Mono", monospace';
+      ctx.font = 'bold 16px system-ui, sans-serif';
       ctx.fillStyle = '#ffffff';
-      ctx.textAlign = 'left';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(`${(progress * 100).toFixed(1)}%`, dialCenterX, dialCenterY - 4);
+      ctx.font = '7.5px "Space Mono", monospace';
+      ctx.fillStyle = '#94a3b8';
+      ctx.fillText('DROPOUT RISK', dialCenterX, dialCenterY + 12);
 
-      const words = visibleText.split(' ');
-      let line = '';
-      let lineY = streamWindowY + 44;
-      for (let i = 0; i < words.length; i++) {
-        const testLine = line + words[i] + ' ';
-        const metrics = ctx.measureText(testLine);
-        if (metrics.width > width - 70 && i > 0) {
-          ctx.fillText(line, 28, lineY);
-          line = words[i] + ' ';
-          lineY += 20;
-        } else {
-          line = testLine;
-        }
-      }
-      ctx.fillText(line, 28, lineY);
+      // Right: Explainable AI (XAI) Feature Importance Bars
+      const xaiStartX = 150;
+      const xaiW = width - xaiStartX - 28;
+      const drivers = [
+        { label: 'Attendance Deficit', impact: '+42.8%', ratio: 0.85, color: '#f43f5e' },
+        { label: 'Internal Exam Scores', impact: '+28.5%', ratio: 0.62, color: '#a855f7' },
+        { label: 'Assignment Overdue', impact: '+18.2%', ratio: 0.44, color: '#38bdf8' }
+      ];
 
-      if (Math.floor(frame / 18) % 2 === 0 && charProgress < fullText.length) {
-        const lastLineWidth = ctx.measureText(line).width;
-        ctx.fillStyle = '#38bdf8';
-        ctx.fillRect(28 + lastLineWidth + 2, lineY - 9, 6, 12);
-      }
+      drivers.forEach((drv, i) => {
+        const dy = 78 + i * 44;
+        ctx.font = '8px "Space Mono", monospace';
+        ctx.fillStyle = '#cbd5e1';
+        ctx.textAlign = 'left';
+        ctx.fillText(drv.label, xaiStartX, dy);
 
-      // 3. Clean Stream Telemetry Footer (No looping loading bar)
-      const footerY = height - 18;
+        ctx.fillStyle = drv.color;
+        ctx.textAlign = 'right';
+        ctx.fillText(drv.impact, xaiStartX + xaiW, dy);
+
+        // Bar track
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.06)';
+        ctx.beginPath();
+        ctx.roundRect(xaiStartX, dy + 6, xaiW, 8, 4);
+        ctx.fill();
+
+        // Active Bar
+        ctx.fillStyle = drv.color;
+        ctx.beginPath();
+        ctx.roundRect(xaiStartX, dy + 6, xaiW * drv.ratio, 8, 4);
+        ctx.fill();
+      });
+
+      // Footer
+      const footerY = height - 16;
       ctx.font = '8.5px "Space Mono", monospace';
       ctx.fillStyle = '#888888';
       ctx.textAlign = 'left';
-      ctx.fillText('THROUGHPUT: ~84 TOKENS/SEC', 16, footerY);
+      ctx.fillText('STREAMLIT SUITE • REAL-TIME XAI DIAGNOSTICS', 16, footerY);
 
-      // Clean static indicator instead of looping loading bar
-      const barW = Math.max(60, width - 320);
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-      ctx.fillRect(170, footerY - 8, barW, 4);
-      ctx.fillStyle = '#38bdf8';
-      ctx.fillRect(170, footerY - 8, barW, 4);
-
-      ctx.fillStyle = '#10b981';
       ctx.textAlign = 'right';
-      ctx.fillText('STATUS: STREAMING', width - 16, footerY);
+      ctx.fillStyle = '#10b981';
+      ctx.fillText('PRESCRIPTIVE PLANS ACTIVE', width - 16, footerY);
     };
 
     render();
@@ -413,8 +434,8 @@ export function RoastingAITokenStreamCanvas({ isActive = true }) {
 }
 
 // ============================================================================
-// STAGE 04: 2026 Production SaaS
-// AI Resume Builder: Decoupled Cloudflare Edge + Gemini ATS Parser (98.4%)
+// STAGE 04: Jul 2026: Power BI Digital Payment Fraud Telemetry
+// Dynamic DAX Telemetry Cards & Live Anomaly Ticker
 // ============================================================================
 export function EdgeResumeATSParserCanvas({ isActive = true }) {
   const canvasRef = useRef(null);
@@ -450,21 +471,24 @@ export function EdgeResumeATSParserCanvas({ isActive = true }) {
     const ro = new ResizeObserver(resize);
     ro.observe(parent);
 
-    const scanCategories = [
-      { name: 'KEYWORDS (React, Node, SQL)', score: 98 },
-      { name: 'STRUCTURE (ATS Formatted)', score: 100 },
-      { name: 'IMPACT METRICS (Quantified)', score: 96 },
-      { name: 'SECURITY (Google OAuth PKCE)', score: 100 }
+    const transactions = [
+      { id: '#TX-7412', mode: 'UPI_GATEWAY', city: 'Mumbai', risk: '92.4', alert: true },
+      { id: '#TX-7413', mode: 'VISA_DEBIT', city: 'Delhi NCR', risk: '14.1', alert: false },
+      { id: '#TX-7414', mode: 'NET_BANKING', city: 'Bengaluru', risk: '88.0', alert: true },
+      { id: '#TX-7415', mode: 'UPI_QR_CODE', city: 'Jaipur', risk: '21.3', alert: false }
     ];
+
+    let _frame = 0;
 
     const render = () => {
       animId = requestAnimationFrame(render);
-
+      if (!isActiveRef.current) return;
+      _frame++;
       ctx.clearRect(0, 0, width, height);
 
-      // 1. Top Architecture Gateway Bar
+      // Header Bar
       const headerY = 16;
-      ctx.fillStyle = 'rgba(16, 16, 24, 0.85)';
+      ctx.fillStyle = 'rgba(16, 18, 28, 0.9)';
       ctx.fillRect(16, headerY, width - 32, 28);
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
       ctx.strokeRect(16, headerY, width - 32, 28);
@@ -472,92 +496,53 @@ export function EdgeResumeATSParserCanvas({ isActive = true }) {
       ctx.font = '9px "Space Mono", monospace';
       ctx.fillStyle = '#ffffff';
       ctx.textAlign = 'left';
-      ctx.fillText('EDGE: CLOUDFLARE PAGES', 28, headerY + 18);
+      ctx.fillText('POWER BI // TELEMETRY STREAM', 28, headerY + 18);
 
-      ctx.fillStyle = '#10b981';
-      ctx.fillText('AUTH: OAUTH 2.0 PKCE', Math.min(170, width * 0.45), headerY + 18);
-
+      ctx.fillStyle = '#38bdf8';
       ctx.textAlign = 'right';
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-      ctx.fillText('POSTGRESQL', width - 28, headerY + 18);
+      ctx.fillText('7,500+ TRANSACTIONS • DAX KPI', width - 28, headerY + 18);
 
-      // 2. Clean ATS Parser Scoring Pane (No moving laser scanner line)
-      const scanCardY = 54;
-      const scanCardH = height - 90;
-      ctx.fillStyle = 'rgba(10, 10, 14, 0.9)';
-      ctx.fillRect(16, scanCardY, width - 32, scanCardH);
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
-      ctx.strokeRect(16, scanCardY, width - 32, scanCardH);
+      // Ticker Rows
+      const rowBaseY = 56;
+      const rowHeight = Math.min(38, (height - 96) / 4);
 
-      // Left Column: Category Progress Bars
-      const barBaseY = scanCardY + 22;
-      const barSpacing = Math.min(28, (scanCardH - 30) / 4);
+      transactions.forEach((tx, idx) => {
+        const ry = rowBaseY + idx * rowHeight;
+        ctx.fillStyle = tx.alert ? 'rgba(244, 63, 94, 0.1)' : 'rgba(12, 14, 20, 0.8)';
+        ctx.strokeStyle = tx.alert ? 'rgba(244, 63, 94, 0.35)' : 'rgba(255, 255, 255, 0.08)';
+        ctx.lineWidth = 1;
 
-      scanCategories.forEach((cat, idx) => {
-        const y = barBaseY + idx * barSpacing;
+        ctx.beginPath();
+        ctx.roundRect(16, ry, width - 32, rowHeight - 6, 6);
+        ctx.fill();
+        ctx.stroke();
 
-        ctx.font = '8px "Space Mono", monospace';
-        ctx.fillStyle = '#aaaaaa';
+        ctx.font = '8.5px "Space Mono", monospace';
+        ctx.fillStyle = tx.alert ? '#f43f5e' : '#38bdf8';
         ctx.textAlign = 'left';
-        ctx.fillText(cat.name, 28, y);
+        ctx.fillText(tx.id, 26, ry + (rowHeight - 6) / 2 + 3);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.fillText(tx.mode, 95, ry + (rowHeight - 6) / 2 + 3);
+
+        ctx.fillStyle = '#94a3b8';
+        ctx.fillText(tx.city, Math.min(210, width * 0.55), ry + (rowHeight - 6) / 2 + 3);
 
         ctx.textAlign = 'right';
-        ctx.fillStyle = '#ffffff';
-        const rightLimit = width > 340 ? width - 105 : width - 75;
-        ctx.fillText(`${cat.score}%`, rightLimit, y);
-
-        // Progress bar
-        const barW = Math.max(60, rightLimit - 30);
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-        ctx.fillRect(28, y + 4, barW, 4);
-
-        const fillW = (cat.score / 100) * barW;
-        ctx.fillStyle = '#38bdf8';
-        ctx.fillRect(28, y + 4, fillW, 4);
+        ctx.fillStyle = tx.alert ? '#f43f5e' : '#10b981';
+        ctx.fillText(`RISK: ${tx.risk}`, width - 26, ry + (rowHeight - 6) / 2 + 3);
       });
 
-      // Right Column: Overall ATS Score Circular Gauge
-      if (width > 320) {
-        const gaugeX = width - 58;
-        const gaugeY = scanCardY + scanCardH / 2;
-        const gaugeRadius = Math.min(30, scanCardH * 0.28);
-
-        ctx.beginPath();
-        ctx.arc(gaugeX, gaugeY, gaugeRadius, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
-        ctx.lineWidth = 3;
-        ctx.stroke();
-
-        const startAngle = -Math.PI / 2;
-        const scoreProgress = 0.984; // 98.4%
-        ctx.beginPath();
-        ctx.arc(gaugeX, gaugeY, gaugeRadius, startAngle, startAngle + Math.PI * 2 * scoreProgress);
-        ctx.strokeStyle = '#10b981';
-        ctx.lineWidth = 3.5;
-        ctx.stroke();
-
-        ctx.font = '10.5px "Space Mono", monospace';
-        ctx.fillStyle = '#ffffff';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('98.4%', gaugeX, gaugeY - 3);
-
-        ctx.font = '6.5px "Space Mono", monospace';
-        ctx.fillStyle = '#888888';
-        ctx.fillText('ATS SCORE', gaugeX, gaugeY + 9);
-      }
-
-      // 3. Clean Architecture Status Footer
+      // Footer
       const footerY = height - 16;
-      ctx.font = '8.5px "Space Mono", monospace';
+      ctx.font = '8px "Space Mono", monospace';
       ctx.fillStyle = '#888888';
       ctx.textAlign = 'left';
-      ctx.textBaseline = 'alphabetic';
-      ctx.fillText('LATENCY: 74MS TTFB • ZERO PERSISTENCE OF RAW PDFS', 16, footerY);
+      ctx.fillText('POWER QUERY ETL • AUTOMATED INGESTION', 16, footerY);
 
       ctx.textAlign = 'right';
       ctx.fillStyle = '#10b981';
-      ctx.fillText('VERIFIED', width - 16, footerY);
+      ctx.fillText('ANOMALY TELEMETRY ACTIVE', width - 16, footerY);
     };
 
     render();

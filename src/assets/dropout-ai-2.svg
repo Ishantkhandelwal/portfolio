@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGradDrop2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080812" />
+      <stop offset="100%" stop-color="#141428" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#bgGradDrop2)" />
+  <rect x="0" y="0" width="1200" height="750" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
+
+  <rect x="30" y="25" width="1140" height="60" rx="10" fill="#141426" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+  <text x="50" y="60" fill="#ffffff" font-family="'Space Mono', monospace" font-size="16" font-weight="bold">STREAMLIT PRESCRIPTIVE INTERVENTIONS // ACTION PLAN ENGINE</text>
+  <text x="880" y="60" fill="#10b981" font-family="'Space Mono', monospace" font-size="12">STATUS: ML PIPELINE INFERENCE READY</text>
+
+  <!-- 3 Recommendation Columns -->
+  <g transform="translate(30, 115)">
+    <!-- Column 1 -->
+    <rect x="0" y="0" width="360" height="380" rx="12" fill="#121322" stroke="rgba(244,63,94,0.3)" stroke-width="1.5" />
+    <rect x="25" y="25" width="140" height="24" rx="4" fill="rgba(244,63,94,0.2)" />
+    <text x="35" y="42" fill="#f43f5e" font-family="'Space Mono', monospace" font-size="11" font-weight="bold">PRIORITY 1: IMMEDIATE</text>
+    <text x="25" y="85" fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="bold">Attendance Recovery Plan</text>
+    <text x="25" y="115" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13" line-height="1.5">
+      Trigger automated SMS and portal notifications for students below 60% attendance threshold. Mandatory mentor sync scheduled within 48 hours.
+    </text>
+    <rect x="25" y="220" width="310" height="120" rx="8" fill="#0b0b14" stroke="rgba(255,255,255,0.06)" />
+    <text x="40" y="250" fill="#cbd5e1" font-family="'Space Mono', monospace" font-size="11">● Target Recovery: +18% in 3 weeks</text>
+    <text x="40" y="280" fill="#cbd5e1" font-family="'Space Mono', monospace" font-size="11">● Faculty Alert: Dispatched</text>
+    <text x="40" y="310" fill="#38bdf8" font-family="'Space Mono', monospace" font-size="11">● Success Rate Historical: 84.2%</text>
+
+    <!-- Column 2 -->
+    <rect x="390" y="0" width="360" height="380" rx="12" fill="#121322" stroke="rgba(168,85,247,0.3)" stroke-width="1.5" />
+    <rect x="415" y="25" width="150" height="24" rx="4" fill="rgba(168,85,247,0.2)" />
+    <text x="425" y="42" fill="#a855f7" font-family="'Space Mono', monospace" font-size="11" font-weight="bold">PRIORITY 2: ACADEMIC</text>
+    <text x="415" y="85" fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="bold">Remedial Concept Modules</text>
+    <text x="415" y="115" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13">
+      Recommend personalized module practice targeting failed mid-term topics. Automated peer-assisted study circle assignment based on syllabus tags.
+    </text>
+    <rect x="415" y="220" width="310" height="120" rx="8" fill="#0b0b14" stroke="rgba(255,255,255,0.06)" />
+    <text x="430" y="250" fill="#cbd5e1" font-family="'Space Mono', monospace" font-size="11">● Weak Area: Data Structures (Recursion)</text>
+    <text x="430" y="280" fill="#cbd5e1" font-family="'Space Mono', monospace" font-size="11">● Practice Quizzes: 4 Assigned</text>
+    <text x="430" y="310" fill="#a855f7" font-family="'Space Mono', monospace" font-size="11">● Projected Grade Boost: +1.2 GPA</text>
+
+    <!-- Column 3 -->
+    <rect x="780" y="0" width="360" height="380" rx="12" fill="#121322" stroke="rgba(52,211,153,0.3)" stroke-width="1.5" />
+    <rect x="805" y="25" width="140" height="24" rx="4" fill="rgba(52,211,153,0.2)" />
+    <text x="815" y="42" fill="#34d399" font-family="'Space Mono', monospace" font-size="11" font-weight="bold">PRIORITY 3: WELLNESS</text>
+    <text x="805" y="85" fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="bold">Advisor Counseling Check</text>
+    <text x="805" y="115" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13">
+      Prescribe non-academic counseling for students flagged with sudden drops across attendance and assignments, mitigating burnout and dropout risk.
+    </text>
+    <rect x="805" y="220" width="310" height="120" rx="8" fill="#0b0b14" stroke="rgba(255,255,255,0.06)" />
+    <text x="820" y="250" fill="#cbd5e1" font-family="'Space Mono', monospace" font-size="11">● Counselor Assigned: Prof. Sharma</text>
+    <text x="820" y="280" fill="#cbd5e1" font-family="'Space Mono', monospace" font-size="11">● Sync Slot: Thursday 15:30 IST</text>
+    <text x="820" y="310" fill="#34d399" font-family="'Space Mono', monospace" font-size="11">● Retention Probability: 91%</text>
+  </g>
+
+  <!-- Bottom Terminal Log -->
+  <g transform="translate(30, 525)">
+    <rect width="1140" height="190" rx="12" fill="#0b0b14" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+    <text x="25" y="32" fill="#a78bfa" font-family="'Space Mono', monospace" font-size="12">SCIKIT-LEARN MODEL EVALUATION TELEMETRY // PYTHON 3.11</text>
+    <text x="25" y="65" fill="#94a3b8" font-family="'Space Mono', monospace" font-size="11">[INFO] GradientBoostingClassifier &amp; RandomForestClassifier ensemble loaded.</text>
+    <text x="25" y="90" fill="#94a3b8" font-family="'Space Mono', monospace" font-size="11">[INFO] Stratified K-Fold CV (k=5) verified: ROC-AUC = 0.932, Precision = 0.885, Recall = 0.891.</text>
+    <text x="25" y="115" fill="#38bdf8" font-family="'Space Mono', monospace" font-size="11">[INFO] Explainable AI tree explainer computed in 42ms. Interactive Streamlit session state active.</text>
+    <text x="25" y="140" fill="#10b981" font-family="'Space Mono', monospace" font-size="11">✔ Batch evaluation completed across 1,676 active students. 0 errors detected.</text>
+  </g>
+</svg>

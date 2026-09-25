@@ -93,11 +93,11 @@ export default function Navbar({ isHeroPage }) {
 
   const onResumeClick = (e) => {
     e.preventDefault();
-    const href = '/Dinesh_Resume.pdf';
+    const href = '/Ishant_Resume.pdf';
     try {
       const a = document.createElement('a');
       a.href = href;
-      a.download = 'Dinesh_Resume.pdf';
+      a.download = 'Ishant_Resume.pdf';
       a.target = '_self';
       document.body.appendChild(a);
       a.click();
@@ -135,7 +135,7 @@ export default function Navbar({ isHeroPage }) {
           onClick={playClickSound}
           style={{ textDecoration: 'none', color: '#fff', fontSize: '1.5rem', fontWeight: 900, letterSpacing: '0.1em' }}
         >
-          <ConvexText text="DINESH" />
+          <ConvexText text="ISHANT" />
         </Link>
       </div>
 
@@ -151,7 +151,7 @@ export default function Navbar({ isHeroPage }) {
         }}
       >
         <a
-          href="/Dinesh_Resume.pdf"
+          href="/Ishant_Resume.pdf"
           onClick={(e) => { onResumeClick(e); playClickSound(); }}
           onMouseEnter={playHoverSound}
           className="nav-link hoverable font-mono uppercase text-glow"
@@ -185,7 +185,7 @@ export default function Navbar({ isHeroPage }) {
             className="mobile-brand-link font-mono uppercase text-glow"
             onClick={() => { playClickSound(); setMobileMenuOpen(false); }}
           >
-            Dinesh
+            Ishant
           </Link>
 
           {/* Desktop Navigation Links */}
@@ -217,7 +217,7 @@ export default function Navbar({ isHeroPage }) {
             {/* Desktop Resume link */}
             {!isHeroPage && (
               <a
-                href="/Dinesh_Resume.pdf"
+                href="/Ishant_Resume.pdf"
                 onClick={(e) => { onResumeClick(e); playClickSound(); }}
                 onMouseEnter={playHoverSound}
                 className="nav-link hoverable font-mono uppercase text-glow desktop-resume-link"
@@ -292,7 +292,7 @@ export default function Navbar({ isHeroPage }) {
 
         <div className="mobile-drawer-footer font-mono">
           <a
-            href="/Dinesh_Resume.pdf"
+            href="/Ishant_Resume.pdf"
             onClick={(e) => {
               onResumeClick(e);
               playClickSound();
@@ -309,7 +309,7 @@ export default function Navbar({ isHeroPage }) {
           </a>
 
           <div className="mobile-footer-meta text-gray">
-            <span>FULL STACK DEVELOPER & AIML</span>
+            <span>DATA ANALYST &amp; ML DEVELOPER</span>
             <span>PORTFOLIO v2.0</span>
           </div>
         </div>

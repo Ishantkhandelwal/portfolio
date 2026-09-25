@@ -1,4 +1,4 @@
-import dineshPhoto from '../assets/MYphoto.jpeg';
+import ishantPhoto from '../assets/Myself.webp';
 import EngineeringTelemetry from './EngineeringTelemetry';
 import Timeline from './Timeline';
 import MaskedTitle from './MaskedTitle';
@@ -13,23 +13,26 @@ export default function About() {
             <MaskedTitle number="1." text="About Me" />
             <div className="divider" />
             <p className="text-gray about-text">
-              I’m Dinesh, an AI-Native Full Stack Developer and 4th-year AIML student specializing in architecture-driven, AI-augmented engineering. Rather than spending weeks writing boilerplate code by hand, I operate at the architectural level: designing decoupled system flows, data schemas, API contracts, and responsive UI layouts with HTML, CSS, and Tailwind. By directing generative AI as an engineering co-pilot, I synthesize, debug, and deploy production-ready cloud applications to Cloudflare Pages and Vercel at rapid sprint velocities.
+              I’m Ishant Khandelwal, a Computer Science &amp; Engineering student at Lovely Professional University specializing in Data Analytics, Machine Learning, and Business Intelligence. I transform complex relational and unstructured datasets into high-impact visual intelligence and predictive systems. From engineering end-to-end ML classification pipelines with Scikit-learn and Explainable AI (XAI) to building dynamic Power BI &amp; Tableau dashboards with automated Power Query ETL workflows, I focus on turning raw data into strategic, actionable outcomes.
             </p>
             <div className="font-mono text-gray skill-list text-sm">
-              <p><span style={{ color: '#fff' }}></span> System Architecture & Data Flows</p>
-              <p><span style={{ color: '#fff' }}></span> AI-Augmented Code Synthesis & Prompting</p>
-              <p><span style={{ color: '#fff' }}></span> UI Layout Craft (HTML, CSS, Tailwind)</p>
-              <p><span style={{ color: '#fff' }}></span> Cloud & Edge Deployments (Cloudflare & Vercel)</p>
+              <p><span style={{ color: '#fff' }}></span> Predictive Machine Learning &amp; Scikit-learn Pipelines</p>
+              <p><span style={{ color: '#fff' }}></span> Exploratory Data Analysis (EDA) &amp; Data Preprocessing</p>
+              <p><span style={{ color: '#fff' }}></span> BI Dashboards &amp; Visual Telemetry (Power BI, Tableau, Streamlit)</p>
+              <p><span style={{ color: '#fff' }}></span> Relational Database Modeling &amp; Complex SQL Optimization</p>
             </div>
           </div>
 
           <div className="abstract-box hoverable gsap-reveal">
             <div className="about-photo-wrapper">
               <img
-                src={dineshPhoto}
-                alt="Dinesh - Full Stack Developer & AI Engineer"
+                src={ishantPhoto}
+                alt="Ishant Khandelwal - Data Analyst & ML Engineer"
                 className="about-photo-img"
-                loading="eager"
+                loading="lazy"
+                decoding="async"
+                width="420"
+                height="480"
               />
             </div>
           </div>

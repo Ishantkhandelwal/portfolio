@@ -1,6 +1,6 @@
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
-import { cloudflare } from '@cloudflare/vite-plugin';
+
 
 function devEmailApiPlugin() {
   return {
@@ -47,13 +47,9 @@ function devEmailApiPlugin() {
             }
 
             const env = loadEnv('development', process.cwd(), '');
-            const apiKey = env.RESEND_API_KEY || process.env.RESEND_API_KEY;
-
-            if (!apiKey) {
-              res.writeHead(500);
-              res.end(JSON.stringify({ success: false, error: 'RESEND_API_KEY is not set in .env' }));
-              return;
-            }
+            const apiKey = (env.RESEND_API_KEY || process.env.RESEND_API_KEY || '').trim();
+            const toEmail = (env.RESEND_TO_EMAIL || process.env.RESEND_TO_EMAIL || 'ishantkhandelwal01@gmail.com').trim();
+            const fromEmail = (env.RESEND_FROM_EMAIL || process.env.RESEND_FROM_EMAIL || 'Portfolio Contact <onboarding@resend.dev>').trim();
 
             const cleanEmail =
               senderEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(senderEmail.trim())
@@ -71,6 +67,52 @@ function devEmailApiPlugin() {
             const safeName = escapeHtml(senderName.trim());
             const safeEmail = cleanEmail ? escapeHtml(cleanEmail) : 'Not provided';
             const safeMessage = escapeHtml(senderMessage.trim());
+
+            if (!apiKey) {
+              console.log('\n[Portfolio Dev Email] RESEND_API_KEY not detected in .env');
+              console.log(`[Portfolio Dev Email] Attempting FormSubmit relay to ${toEmail}...`);
+              try {
+                const fsRes = await fetch(`https://formsubmit.co/ajax/${toEmail}`, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                  },
+                  body: JSON.stringify({
+                    name: safeName,
+                    email: cleanEmail || 'noreply@ishantportfolio.dev',
+                    _subject: `[Portfolio Inquiry] from ${safeName}`,
+                    message: safeMessage,
+                    _template: 'table',
+                  }),
+                });
+
+                if (fsRes.ok) {
+                  console.log('[Portfolio Dev Email] Dispatched via FormSubmit relay successfully!');
+                  res.writeHead(200);
+                  res.end(JSON.stringify({ success: true, message: `Message sent successfully to ${toEmail}!` }));
+                  return;
+                }
+              } catch {
+                console.warn('[Portfolio Dev Email] FormSubmit relay unreachable (offline mode). Logging payload locally:');
+              }
+
+              console.log('================== DEV EMAIL TRANSMISSION LOG ==================');
+              console.log(`From:    ${senderName} <${cleanEmail || 'No Email'}>`);
+              console.log(`To:      ${toEmail}`);
+              console.log(`Message:\n${senderMessage}`);
+              console.log('================================================================\n');
+
+              res.writeHead(200);
+              res.end(
+                JSON.stringify({
+                  success: true,
+                  simulated: true,
+                  message: 'Local development simulation: Transmission logged to terminal. Add RESEND_API_KEY in .env to deliver real emails via Resend.',
+                })
+              );
+              return;
+            }
 
             const emailHtml = `
               <!DOCTYPE html>
@@ -103,7 +145,7 @@ function devEmailApiPlugin() {
                   <div class="field-label">Message Payload</div>
                   <div class="message-box">${safeMessage}</div>
                   <div class="footer">
-                    Dispatched from Dinesh Portfolio Beacon • ${new Date().toUTCString()}
+                    Dispatched from Ishant Portfolio Beacon • ${new Date().toUTCString()}
                   </div>
                 </div>
               </body>
@@ -111,11 +153,11 @@ function devEmailApiPlugin() {
             `;
 
             const emailPayload = {
-              from: 'Portfolio Contact <onboarding@resend.dev>',
-              to: ['itsdinesh036@gmail.com'],
-              subject: `[Portfolio Inquiry] ${senderName.trim()}`,
+              from: fromEmail,
+              to: [toEmail],
+              subject: `[Portfolio Inquiry] from ${safeName}`,
               html: emailHtml,
-              text: `Name: ${senderName}\nEmail: ${cleanEmail || 'Not provided'}\n\nMessage:\n${senderMessage}`,
+              text: `Name: ${safeName}\nEmail: ${cleanEmail || 'Not provided'}\n\nMessage:\n${safeMessage}`,
             };
 
             if (cleanEmail) {
@@ -125,25 +167,27 @@ function devEmailApiPlugin() {
             const resendRes = await fetch('https://api.resend.com/emails', {
               method: 'POST',
               headers: {
-                Authorization: `Bearer ${apiKey.trim()}`,
+                Authorization: `Bearer ${apiKey}`,
                 'Content-Type': 'application/json',
               },
               body: JSON.stringify(emailPayload),
             });
 
-            const resendData = await resendRes.json();
+            const resendData = await resendRes.json().catch(() => ({}));
 
             if (!resendRes.ok) {
+              console.error('[Portfolio Dev Email] Resend API error response:', resendData);
               res.writeHead(resendRes.status);
               res.end(
                 JSON.stringify({
                   success: false,
-                  error: resendData?.message || 'Failed to dispatch email via Resend API.',
+                  error: resendData?.message || `Failed to dispatch email via Resend API (${resendRes.status}).`,
                 })
               );
               return;
             }
 
+            console.log(`[Portfolio Dev Email] Email successfully dispatched via Resend API! ID: ${resendData?.id}`);
             res.writeHead(200);
             res.end(
               JSON.stringify({
@@ -162,9 +206,11 @@ function devEmailApiPlugin() {
   };
 }
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), cloudflare(), devEmailApiPlugin()],
+  plugins: [
+    react(),
+    devEmailApiPlugin()
+  ],
   build: {
     cssMinify: 'esbuild',
     chunkSizeWarningLimit: 600,

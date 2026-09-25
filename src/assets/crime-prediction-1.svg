@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGradCrime" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#08080f" />
+      <stop offset="100%" stop-color="#14111d" />
+    </linearGradient>
+    <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e11d48" />
+      <stop offset="100%" stop-color="#fb7185" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#bgGradCrime)" />
+  <rect x="0" y="0" width="1200" height="750" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
+
+  <!-- Top Header -->
+  <rect x="30" y="25" width="1140" height="60" rx="10" fill="#17121c" stroke="rgba(225,29,72,0.3)" stroke-width="1.5" />
+  <circle cx="58" cy="55" r="8" fill="#e11d48" />
+  <text x="78" y="60" fill="#ffffff" font-family="'Space Mono', monospace" font-size="16" font-weight="bold">CRIME TREND FORECASTING // DISTRICT-LEVEL PREDICTIVE REGRESSION</text>
+  <text x="830" y="60" fill="#fb7185" font-family="'Space Mono', monospace" font-size="13">PYTHON • SCIKIT-LEARN • PANDAS &amp; NUMPY</text>
+
+  <!-- Left Card: Regression Curve & Data Distribution -->
+  <g transform="translate(30, 105)">
+    <rect width="680" height="610" rx="14" fill="#14111b" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+    <text x="30" y="40" fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="700">Predictive Regression Model vs District Observations</text>
+    <text x="30" y="62" fill="#94a3b8" font-family="'Space Mono', monospace" font-size="11">7 MULTI-FACTOR CRIME PREDICTORS • SCIKIT-LEARN OLS REGRESSION</text>
+
+    <!-- Regression Canvas Area -->
+    <g transform="translate(30, 95)">
+      <rect width="620" height="420" rx="8" fill="#0c0a12" stroke="rgba(255,255,255,0.05)" />
+
+      <!-- Grid lines -->
+      <line x1="50" y1="360" x2="580" y2="360" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+      <line x1="50" y1="50" x2="50" y2="360" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+      <line x1="50" y1="280" x2="580" y2="280" stroke="rgba(255,255,255,0.05)" stroke-dasharray="4" />
+      <line x1="50" y1="200" x2="580" y2="200" stroke="rgba(255,255,255,0.05)" stroke-dasharray="4" />
+      <line x1="50" y1="120" x2="580" y2="120" stroke="rgba(255,255,255,0.05)" stroke-dasharray="4" />
+
+      <!-- Scatter Data Points (Districts across states) -->
+      <circle cx="90" cy="330" r="4" fill="#38bdf8" opacity="0.7" />
+      <circle cx="120" cy="310" r="5" fill="#38bdf8" opacity="0.8" />
+      <circle cx="160" cy="300" r="4" fill="#818cf8" opacity="0.6" />
+      <circle cx="180" cy="270" r="5" fill="#38bdf8" opacity="0.8" />
+      <circle cx="210" cy="250" r="6" fill="#fb7185" opacity="0.9" />
+      <circle cx="240" cy="235" r="4" fill="#38bdf8" opacity="0.7" />
+      <circle cx="280" cy="220" r="5" fill="#818cf8" opacity="0.8" />
+      <circle cx="310" cy="190" r="6" fill="#fb7185" opacity="0.9" />
+      <circle cx="340" cy="210" r="5" fill="#38bdf8" opacity="0.8" />
+      <circle cx="370" cy="170" r="6" fill="#fb7185" opacity="0.9" />
+      <circle cx="410" cy="155" r="5" fill="#38bdf8" opacity="0.7" />
+      <circle cx="450" cy="130" r="7" fill="#e11d48" opacity="0.95" />
+      <circle cx="480" cy="140" r="5" fill="#fb7185" opacity="0.8" />
+      <circle cx="510" cy="110" r="6" fill="#e11d48" opacity="0.95" />
+      <circle cx="540" cy="95" r="7" fill="#e11d48" opacity="1" />
+
+      <!-- Regression Fitted Line -->
+      <line x1="70" y1="345" x2="560" y2="85" stroke="#fb7185" stroke-width="3.5" />
+      <!-- Confidence Interval Band -->
+      <path d="M 70 360 L 560 105 L 560 65 L 70 330 Z" fill="rgba(251,113,133,0.12)" />
+
+      <!-- Labels -->
+      <text x="315" y="395" fill="#94a3b8" font-family="'Space Mono', monospace" font-size="11" text-anchor="middle">COMPOSITE MULTI-FACTOR RISK EXPOSURE INDEX</text>
+      <text x="25" y="45" fill="#94a3b8" font-family="'Space Mono', monospace" font-size="10">REPORTED CRIME RATE PER 100K</text>
+    </g>
+
+    <!-- Bottom Stat Pill -->
+    <g transform="translate(30, 540)">
+      <rect width="620" height="50" rx="8" fill="#0c0a12" stroke="rgba(255,255,255,0.06)" />
+      <text x="20" y="30" fill="#38bdf8" font-family="'Space Mono', monospace" font-size="12">R² SCORE: 0.864</text>
+      <text x="210" y="30" fill="#fb7185" font-family="'Space Mono', monospace" font-size="12">MAE: 3.42 / 100k</text>
+      <text x="400" y="30" fill="#10b981" font-family="'Space Mono', monospace" font-size="12">P-VALUE &lt; 0.001 (STAT SIGNIFICANT)</text>
+    </g>
+  </g>
+
+  <!-- Right Cards: 7 Crime Factors & Correlation Heatmap -->
+  <g transform="translate(730, 105)">
+    <!-- 7 Factors Box -->
+    <rect width="440" height="290" rx="14" fill="#14111b" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+    <text x="25" y="40" fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="700">7 Core Crime Factors Evaluated</text>
+    <text x="25" y="62" fill="#94a3b8" font-family="'Space Mono', monospace" font-size="11">MULTI-FACTOR FEATURE SCALING &amp; IMPUTATION</text>
+
+    <g transform="translate(25, 90)">
+      <text x="0" y="15" fill="#cbd5e1" font-family="'Space Mono', monospace" font-size="12">01. Domestic Assault &amp; Cruelty</text>
+      <text x="390" y="15" fill="#e11d48" font-family="'Space Mono', monospace" font-size="12" text-anchor="end">r = 0.82</text>
+
+      <text x="0" y="45" fill="#cbd5e1" font-family="'Space Mono', monospace" font-size="12">02. Kidnapping &amp; Abduction</text>
+      <text x="390" y="45" fill="#fb7185" font-family="'Space Mono', monospace" font-size="12" text-anchor="end">r = 0.74</text>
+
+      <text x="0" y="75" fill="#cbd5e1" font-family="'Space Mono', monospace" font-size="12">03. Assault with Intent to Outrage Modesty</text>
+      <text x="390" y="75" fill="#fb7185" font-family="'Space Mono', monospace" font-size="12" text-anchor="end">r = 0.71</text>
+
+      <text x="0" y="105" fill="#cbd5e1" font-family="'Space Mono', monospace" font-size="12">04. Dowry Prohibition Act Violations</text>
+      <text x="390" y="105" fill="#facc15" font-family="'Space Mono', monospace" font-size="12" text-anchor="end">r = 0.58</text>
+
+      <text x="0" y="135" fill="#cbd5e1" font-family="'Space Mono', monospace" font-size="12">05. Cyber Harassment Incidents</text>
+      <text x="390" y="135" fill="#38bdf8" font-family="'Space Mono', monospace" font-size="12" text-anchor="end">r = 0.52</text>
+
+      <text x="0" y="165" fill="#cbd5e1" font-family="'Space Mono', monospace" font-size="12">06. Human Trafficking Incidents</text>
+      <text x="390" y="165" fill="#818cf8" font-family="'Space Mono', monospace" font-size="12" text-anchor="end">r = 0.46</text>
+    </g>
+
+    <!-- Bottom EDA Matrix Card -->
+    <g transform="translate(0, 310)">
+      <rect width="440" height="300" rx="14" fill="#14111b" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+      <text x="25" y="40" fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="700">Pandas EDA &amp; Outlier Preprocessing</text>
+      <text x="25" y="62" fill="#94a3b8" font-family="'Space Mono', monospace" font-size="11">IQR FILTERING &amp; MIN-MAX FEATURE NORMALIZATION</text>
+
+      <!-- Preprocessing badges -->
+      <g transform="translate(25, 95)">
+        <rect width="390" height="42" rx="8" fill="#0b0912" stroke="rgba(255,255,255,0.06)" />
+        <text x="15" y="26" fill="#10b981" font-family="'Space Mono', monospace" font-size="11">✔ Missing Value Imputation (KNN &amp; Median)</text>
+
+        <rect y="55" width="390" height="42" rx="8" fill="#0b0912" stroke="rgba(255,255,255,0.06)" />
+        <text x="15" y="81" fill="#38bdf8" font-family="'Space Mono', monospace" font-size="11">✔ Interquartile Range (IQR) Outlier Trimming</text>
+
+        <rect y="110" width="390" height="42" rx="8" fill="#0b0912" stroke="rgba(255,255,255,0.06)" />
+        <text x="15" y="136" fill="#a855f7" font-family="'Space Mono', monospace" font-size="11">✔ StandardScaler &amp; Robust Normalization</text>
+
+        <rect y="165" width="390" height="30" rx="6" fill="rgba(225,29,72,0.15)" />
+        <text x="15" y="185" fill="#fb7185" font-family="'Space Mono', monospace" font-size="10" font-weight="bold">TARGET: RESOURCE ALLOCATION &amp; PREVENTIVE INTERVENTIONS</text>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -10,7 +10,6 @@ import usePageTransitions from '../hooks/usePageTransitions';
 import { useLenis, resetLenis } from '../hooks/useLenis';
 
 import ThreeStarfield from './ThreeStarfield';
-import ThreeBackground from './ThreeBackground';
 
 export default function Layout({ isPreloaderDone }) {
   useLenis();
@@ -179,8 +178,7 @@ export default function Layout({ isPreloaderDone }) {
   return (
     <>
       <CustomCursor />
-      <ThreeStarfield isHeroPage={isHeroPage} />
-      <ThreeBackground isHeroPage={isHeroPage} />
+      <ThreeStarfield />
 
       <Navbar isHeroPage={isHeroPage} />
       

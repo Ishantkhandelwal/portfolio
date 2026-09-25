@@ -47,7 +47,7 @@ export default function Contact() {
 
   const handleCopyEmail = () => {
     playClickSound();
-    navigator.clipboard.writeText('itsdinesh036@gmail.com');
+    navigator.clipboard.writeText('ishantkhandelwal01@gmail.com');
     setCopied(true);
     setTimeout(() => setCopied(false), 2400);
   };
@@ -56,63 +56,126 @@ export default function Contact() {
     e.preventDefault();
     playClickSound();
 
-    if (!formData.senderName || !formData.senderMessage) {
-      setStatusMsg('Please enter your name and message.');
+    const name = formData.senderName.trim();
+    const email = formData.senderEmail.trim();
+    const message = formData.senderMessage.trim();
+
+    if (!name) {
+      setStatusMsg('Please enter your name.');
       return;
     }
 
-    // Begin the rocket flight and 0-100% counter sequence
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setStatusMsg('Please enter a valid email address.');
+      return;
+    }
+
+    if (!message) {
+      setStatusMsg('Please enter your message.');
+      return;
+    }
+
+    // Begin the rocket flight and counter sequence
     setSendState('launching');
     setLaunchProgress(0);
     setStatusMsg('');
 
-    // Dispatch real backend email transmission via Resend
-    const sendPromise = fetch('/api/send-email', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        senderName: formData.senderName,
-        senderEmail: formData.senderEmail,
-        senderMessage: formData.senderMessage,
-      }),
-    })
-      .then(async (res) => {
+    let isFinished = false;
+    let apiStatus = null; // null | 'success' | 'error'
+    let failureReason = '';
+
+    // Dispatch backend email transmission
+    const sendPromise = (async () => {
+      try {
+        const res = await fetch('/api/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            senderName: name,
+            senderEmail: email,
+            senderMessage: message,
+          }),
+        });
+
         const data = await res.json().catch(() => ({}));
-        if (!res.ok) {
-          throw new Error(data?.error || 'Email dispatch failed.');
+
+        if (res.ok && data?.success) {
+          return data;
         }
-        return data;
+
+        // Check if backend returned an error message from Resend
+        if (data?.error) {
+          throw new Error(data.error);
+        }
+
+        if (res.status === 404) {
+          throw new Error('API_ROUTE_NOT_FOUND');
+        }
+
+        throw new Error(`Email dispatch failed with HTTP ${res.status}.`);
+      } catch (primaryErr) {
+        // Fallback to FormSubmit relay only if API route was not found (purely static hosting) or network dropped
+        if (primaryErr.message === 'API_ROUTE_NOT_FOUND' || primaryErr.name === 'TypeError') {
+          console.warn('Backend API relay unavailable, trying FormSubmit fallback...', primaryErr);
+          const fsRes = await fetch('https://formsubmit.co/ajax/ishantkhandelwal01@gmail.com', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+            },
+            body: JSON.stringify({
+              name,
+              email: email || 'noreply@ishantportfolio.dev',
+              _subject: `[Portfolio Inquiry] from ${name}`,
+              message,
+              _template: 'table',
+            }),
+          });
+
+          if (fsRes.ok) {
+            const fsData = await fsRes.json().catch(() => ({}));
+            return fsData;
+          }
+        }
+
+        throw primaryErr;
+      }
+    })();
+
+    sendPromise
+      .then(() => {
+        apiStatus = 'success';
       })
       .catch((err) => {
-        console.error('Backend email delivery error:', err);
-        throw err;
+        apiStatus = 'error';
+        failureReason = err.message || 'Transmission failed. Please check your Resend API key or use direct email.';
       });
 
     const startTime = performance.now();
-    const duration = 3400; // 3.4 seconds smooth, slightly slower glide
+    const glideDuration = 2800; // 2.8s smooth glide
 
     const step = (now) => {
+      if (isFinished) return;
       const elapsed = now - startTime;
-      const progress = Math.min(100, Math.round((elapsed / duration) * 100));
-      setLaunchProgress(progress);
+      const flightProgress = Math.min(90, Math.round((elapsed / glideDuration) * 90));
 
-      if (progress < 100) {
+      if (apiStatus === null) {
+        // Still awaiting response - smoothly animate up to 90%
+        setLaunchProgress(flightProgress);
         requestAnimationFrame(step);
+      } else if (apiStatus === 'success') {
+        isFinished = true;
+        // Fast finish to 100%
+        setLaunchProgress(100);
+        setTimeout(() => {
+          setSendState('sent');
+          playClickSound();
+        }, 350);
       } else {
-        // Rocket has reached its destination! Verify backend dispatch result
-        sendPromise
-          .then(() => {
-            setTimeout(() => {
-              setSendState('sent');
-              playClickSound();
-            }, 300);
-          })
-          .catch((err) => {
-            setTimeout(() => {
-              setSendState('idle');
-              setStatusMsg(err.message || 'Transmission failed. Please try again or use direct email.');
-            }, 500);
-          });
+        isFinished = true;
+        setSendState('idle');
+        setLaunchProgress(0);
+        setStatusMsg(failureReason);
       }
     };
 
@@ -383,7 +446,28 @@ export default function Contact() {
 
                   {statusMsg && (
                     <div className="form-status-msg text-glow font-mono">
-                      {statusMsg}
+                      <span>{statusMsg}</span>
+                      {formData.senderMessage && (
+                        <div style={{ marginTop: '0.75rem' }}>
+                          <a
+                            href={`mailto:ishantkhandelwal01@gmail.com?subject=${encodeURIComponent(`[Portfolio Inquiry] ${formData.senderName || 'Inquiry'}`)}&body=${encodeURIComponent(`${formData.senderMessage}\n\nFrom: ${formData.senderName || 'Anonymous'} (${formData.senderEmail || 'No email provided'})`)}`}
+                            className="status-mailto-btn hoverable"
+                            style={{
+                              display: 'inline-block',
+                              padding: '0.4rem 0.9rem',
+                              background: 'rgba(56, 189, 248, 0.15)',
+                              border: '1px solid rgba(56, 189, 248, 0.4)',
+                              borderRadius: '6px',
+                              color: '#38bdf8',
+                              fontSize: '0.75rem',
+                              textDecoration: 'none',
+                              marginTop: '0.25rem',
+                            }}
+                          >
+                            ✉ Open Pre-filled Email to ishantkhandelwal01@gmail.com ↗
+                          </a>
+                        </div>
+                      )}
                     </div>
                   )}
                 </form>
@@ -396,7 +480,7 @@ export default function Contact() {
             <div className="comms-capsule">
               <div className="comms-channel-info">
                 <span className="comms-tag text-gray">My Email:</span>
-                <span className="comms-email">itsdinesh036@gmail.com</span>
+                <span className="comms-email">ishantkhandelwal01@gmail.com</span>
               </div>
 
               <button

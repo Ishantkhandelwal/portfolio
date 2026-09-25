@@ -14,25 +14,27 @@ header.hero-container {
 .hero-subtitle {
   letter-spacing: 0.22em;
   margin-bottom: 1.25rem;
-  font-size: 0.95rem;
+  font-size: clamp(0.72rem, 1.8vw, 0.95rem);
   font-weight: 700;
   color: #ffffff;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.9), 0 0 22px rgba(255, 255, 255, 0.55), 0 0 35px rgba(255, 255, 255, 0.3);
   text-align: center;
+  max-width: 90vw;
 }
 
 .hero-title-1 {
-  font-size: 8.5rem;
+  font-size: clamp(2.6rem, 9.5vw, 8.5rem);
   font-weight: 900;
   line-height: 0.95;
   margin-bottom: 0.5rem;
   letter-spacing: -0.04em;
   color: #eeeeee;
   text-shadow: 0 0 7px rgba(255, 255, 255, 0.55), 0 0 14px rgba(255, 255, 255, 0.28);
+  word-break: break-word;
 }
 
 .hero-title-2 {
-  font-size: 7.5rem;
+  font-size: clamp(2.3rem, 8.5vw, 7.5rem);
   font-weight: 900;
   line-height: 0.95;
   letter-spacing: -0.04em;
@@ -42,6 +44,7 @@ header.hero-container {
   -webkit-background-clip: text;
   background-clip: text;
   margin-bottom: 1.5rem;
+  word-break: break-word;
 }
 
 /* Interactive 3D Holographic Globe CTA */
@@ -245,19 +248,36 @@ header.hero-container {
 }
 
 @media (max-width: 768px) {
+  header.hero-container {
+    min-height: 100svh;
+    padding-top: 6.5rem;
+    padding-bottom: 2rem;
+  }
+
   .hero-subtitle {
-    font-size: 0.76rem;
+    font-size: 0.74rem;
     letter-spacing: 0.12em;
-    line-height: 1.4;
+    line-height: 1.45;
     margin-bottom: 1rem;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
   }
 
-  .hero-title-1 {
-    font-size: 4rem;
+  .hero-globe-wrapper {
+    margin: 2rem 0 1rem;
   }
 
-  .hero-title-2 {
-    font-size: 3.5rem;
+  .hero-globe-cta {
+    width: 130px;
+    height: 130px;
+  }
+
+  .globe-canvas {
+    width: 130px;
+    height: 130px;
+  }
+
+  .globe-core-lens {
+    width: 72px;
+    height: 72px;
   }
 }

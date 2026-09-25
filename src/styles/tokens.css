@@ -22,6 +22,11 @@ body {
   *::after {
     cursor: none !important;
   }
+
+  input,
+  textarea {
+    cursor: text !important;
+  }
 }
 
 ::selection {

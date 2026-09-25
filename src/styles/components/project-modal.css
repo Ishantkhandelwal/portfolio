@@ -602,24 +602,31 @@
 .project-modal-prototype-body {
   flex: 1 1 auto;
   min-height: 0;
-  padding: 1.5rem 2rem 2rem;
+  padding: 1.5rem 2rem 2.5rem;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 .prototype-browser-bar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1.25rem;
-  background: rgba(14, 14, 18, 0.95);
+  background: rgba(14, 14, 18, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-bottom: none;
   border-radius: 12px 12px 0 0;
   gap: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .browser-dots {
@@ -705,34 +712,48 @@
 .prototype-viewport-container {
   position: relative;
   flex: 1 1 auto;
-  min-height: 440px;
-  height: 520px;
-  background: #000;
+  min-height: 520px;
+  height: auto;
+  background: #0d1117;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 0 0 12px 12px;
-  overflow: hidden;
+  overflow: visible;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.prototype-viewport-container.device-desktop {
+  width: 100%;
 }
 
 .prototype-viewport-container.device-desktop .prototype-iframe {
   width: 100%;
-  height: 100%;
+  min-height: 600px;
+  height: 65vh;
   border: none;
 }
 
 .prototype-viewport-container.device-mobile {
   background: #08080a;
+  padding: 1.5rem 1rem;
+  align-items: center;
+}
+
+.prototype-viewport-container.device-mobile .prototype-iframe,
+.prototype-viewport-container.device-mobile .github-live-viewer {
+  width: 100%;
+  max-width: 420px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.95);
+  margin: 0 auto;
 }
 
 .prototype-viewport-container.device-mobile .prototype-iframe {
-  width: 390px;
-  height: 100%;
+  height: 680px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 20px;
-  box-shadow: 0 0 45px rgba(0, 0, 0, 0.95);
-  margin: auto;
 }
 
 .prototype-loading-overlay {
@@ -769,6 +790,518 @@
 }
 
 /* ==========================================================================
+   Live GitHub Repository & README Viewer
+   ========================================================================== */
+
+.github-live-viewer {
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #0d1117;
+  color: #c9d1d9;
+  overflow: visible;
+  padding: 1.5rem 1.75rem 2.5rem;
+  gap: 1.25rem;
+  border-radius: 0 0 12px 12px;
+}
+
+.gh-repo-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.15rem;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.gh-repo-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.gh-logo-icon {
+  color: #f0f6fc;
+}
+
+.gh-repo-path {
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.gh-owner {
+  color: #58a6ff;
+}
+
+.gh-slash {
+  color: #8b949e;
+}
+
+.gh-repo-name {
+  color: #f0f6fc;
+  font-weight: 700;
+}
+
+.gh-badge-public {
+  font-size: 0.65rem;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  padding: 0.1rem 0.5rem;
+  color: #8b949e;
+  text-transform: uppercase;
+}
+
+.gh-action-btn {
+  background: #21262d;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.gh-action-btn:hover {
+  background: #30363d;
+  color: #58a6ff;
+  border-color: #8b949e;
+}
+
+.gh-repo-stats-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.5rem 0.25rem;
+  font-size: 0.75rem;
+  color: #8b949e;
+  flex-wrap: wrap;
+}
+
+.gh-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.gh-stat-item strong {
+  color: #f0f6fc;
+}
+
+.gh-repo-desc-box {
+  padding: 0.85rem 1rem;
+  background: rgba(22, 27, 34, 0.6);
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.gh-file-tree-card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.gh-file-tree-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  background: #21262d;
+  border-bottom: 1px solid #30363d;
+  font-size: 0.78rem;
+  color: #c9d1d9;
+}
+
+.gh-file-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.gh-file-row {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid rgba(48, 54, 61, 0.4);
+  font-size: 0.78rem;
+  text-decoration: none;
+  color: #c9d1d9;
+  transition: background 0.15s ease;
+}
+
+.gh-file-row:last-child {
+  border-bottom: none;
+}
+
+.gh-file-row:hover {
+  background: rgba(56, 139, 253, 0.1);
+  color: #58a6ff;
+}
+
+.gh-file-icon {
+  margin-right: 0.65rem;
+  font-size: 0.85rem;
+}
+
+.gh-file-name {
+  flex: 1;
+}
+
+.gh-file-size {
+  font-size: 0.7rem;
+}
+
+.gh-readme-card {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.gh-readme-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.65rem 1rem;
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+  font-size: 0.8rem;
+  color: #f0f6fc;
+  font-weight: 600;
+}
+
+.gh-readme-body {
+  padding: 1.5rem;
+  position: relative;
+  min-height: 180px;
+}
+
+.gh-markdown-content {
+  color: #c9d1d9;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.gh-markdown-content h1,
+.gh-markdown-content h2,
+.gh-markdown-content h3,
+.gh-markdown-content h4 {
+  color: #f0f6fc;
+  border-bottom: 1px solid #21262d;
+  padding-bottom: 0.4rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.85rem;
+  font-weight: 600;
+}
+
+.gh-markdown-content h1 { font-size: 1.6rem; }
+.gh-markdown-content h2 { font-size: 1.3rem; }
+.gh-markdown-content h3 { font-size: 1.1rem; }
+
+.gh-markdown-content p {
+  margin-bottom: 1rem;
+}
+
+.gh-markdown-content a {
+  color: #58a6ff;
+  text-decoration: none;
+}
+
+.gh-markdown-content a:hover {
+  text-decoration: underline;
+}
+
+.gh-markdown-content pre {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.82rem;
+  margin: 1rem 0;
+}
+
+.gh-markdown-content code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  background: rgba(110, 118, 129, 0.4);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 85%;
+}
+
+.gh-markdown-content pre code {
+  background: transparent;
+  padding: 0;
+}
+
+.gh-markdown-content ul,
+.gh-markdown-content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.gh-markdown-content li {
+  margin-bottom: 0.35rem;
+}
+
+.gh-markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.85rem;
+}
+
+.gh-markdown-content th,
+.gh-markdown-content td {
+  padding: 0.6rem 0.85rem;
+  border: 1px solid #30363d;
+}
+
+.gh-markdown-content th {
+  background: #161b22;
+  color: #f0f6fc;
+}
+
+.gh-markdown-content blockquote {
+  border-left: 4px solid #388bfd;
+  padding: 0.5rem 1rem;
+  color: #8b949e;
+  background: rgba(56, 139, 253, 0.05);
+  margin: 1rem 0;
+  border-radius: 0 6px 6px 0;
+}
+
+.gh-markdown-content img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 0.85rem 0;
+  border: 1px solid #30363d;
+}
+
+/* Fallback High-Fidelity README.md Layout */
+.gh-fallback-readme {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  color: #c9d1d9;
+}
+
+.gh-readme-title-section {
+  border-bottom: 1px solid #30363d;
+  padding-bottom: 1.25rem;
+}
+
+.gh-readme-h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #f0f6fc;
+  margin-bottom: 0.5rem;
+  line-height: 1.25;
+}
+
+.gh-readme-lead {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  color: #8b949e;
+}
+
+.gh-readme-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.gh-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.2rem 0.65rem;
+  border-radius: 20px;
+  border: 1px solid;
+  letter-spacing: 0.04em;
+  font-family: monospace;
+}
+
+.gh-badge-blue { background: rgba(56, 139, 253, 0.15); border-color: #388bfd; color: #58a6ff; }
+.gh-badge-green { background: rgba(46, 160, 67, 0.15); border-color: #2ea043; color: #3fb950; }
+.gh-badge-purple { background: rgba(163, 113, 247, 0.15); border-color: #a371f7; color: #bc8cff; }
+.gh-badge-cyan { background: rgba(56, 189, 248, 0.15); border-color: #38bdf8; color: #7dd3fc; }
+
+.gh-readme-section {
+  border-bottom: 1px solid #21262d;
+  padding-bottom: 1.25rem;
+}
+
+.gh-readme-section:last-child {
+  border-bottom: none;
+}
+
+.gh-readme-section h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #f0f6fc;
+  margin-bottom: 0.75rem;
+}
+
+.gh-readme-flow-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.85rem;
+  margin-top: 0.85rem;
+}
+
+.gh-readme-flow-step {
+  display: flex;
+  gap: 0.75rem;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+}
+
+.flow-step-num {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #58a6ff;
+  line-height: 1;
+}
+
+.flow-step-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.flow-step-title {
+  font-size: 0.85rem;
+  color: #f0f6fc;
+}
+
+.flow-step-tech {
+  font-size: 0.7rem;
+  color: #8b949e;
+}
+
+.flow-step-desc {
+  font-size: 0.78rem;
+  line-height: 1.4;
+  margin-top: 0.25rem;
+}
+
+.gh-readme-bullets {
+  padding-left: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.gh-readme-tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.gh-tech-tag {
+  background: #21262d;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+}
+
+.gh-readme-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.gh-readme-metric-box {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+
+.gh-readme-metric-box .metric-val {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #58a6ff;
+}
+
+.gh-readme-metric-box .metric-lbl {
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  margin-top: 0.2rem;
+  text-transform: uppercase;
+}
+
+.gh-screenshots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 0.85rem;
+}
+
+.gh-screenshot-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.gh-screenshot-item {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #30363d;
+  transition: transform 0.3s ease;
+}
+
+.gh-screenshot-item:hover {
+  transform: scale(1.02);
+}
+
+.gh-readme-code-block {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  font-size: 0.82rem;
+  color: #c9d1d9;
+  margin-top: 0.75rem;
+}
+
+.gh-readme-raw {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: inherit;
+  font-size: 0.78rem;
+  color: #c9d1d9;
+}
+
+.gh-rate-limit-notice {
+  text-align: center;
+  padding: 0.5rem;
+}
+
+/* ==========================================================================
    Modal Custom Scrollbars
    ========================================================================== */
 
@@ -776,7 +1309,8 @@
 .project-modal-architecture-body::-webkit-scrollbar,
 .project-modal-prototype-body::-webkit-scrollbar,
 .architecture-pipeline-grid::-webkit-scrollbar,
-.project-modal-tab-bar::-webkit-scrollbar {
+.project-modal-tab-bar::-webkit-scrollbar,
+.github-live-viewer::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
@@ -785,7 +1319,8 @@
 .project-modal-architecture-body::-webkit-scrollbar-track,
 .project-modal-prototype-body::-webkit-scrollbar-track,
 .architecture-pipeline-grid::-webkit-scrollbar-track,
-.project-modal-tab-bar::-webkit-scrollbar-track {
+.project-modal-tab-bar::-webkit-scrollbar-track,
+.github-live-viewer::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.02);
   border-radius: 4px;
 }
@@ -794,7 +1329,8 @@
 .project-modal-architecture-body::-webkit-scrollbar-thumb,
 .project-modal-prototype-body::-webkit-scrollbar-thumb,
 .architecture-pipeline-grid::-webkit-scrollbar-thumb,
-.project-modal-tab-bar::-webkit-scrollbar-thumb {
+.project-modal-tab-bar::-webkit-scrollbar-thumb,
+.github-live-viewer::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.2);
   border-radius: 4px;
   transition: background 0.2s ease;
@@ -802,7 +1338,8 @@
 
 .project-modal-body::-webkit-scrollbar-thumb:hover,
 .project-modal-architecture-body::-webkit-scrollbar-thumb:hover,
-.project-modal-prototype-body::-webkit-scrollbar-thumb:hover {
+.project-modal-prototype-body::-webkit-scrollbar-thumb:hover,
+.github-live-viewer::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.45);
 }
 
@@ -810,7 +1347,8 @@
 .project-modal-architecture-body,
 .project-modal-prototype-body,
 .architecture-pipeline-grid,
-.project-modal-tab-bar {
+.project-modal-tab-bar,
+.github-live-viewer {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.02);
 }
@@ -889,7 +1427,7 @@
   }
 
   .prototype-viewport-container {
-    min-height: 340px;
-    height: 380px;
+    min-height: 400px;
+    height: auto;
   }
 }

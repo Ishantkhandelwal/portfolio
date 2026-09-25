@@ -11,29 +11,7 @@ section {
   z-index: 10;
 }
 
-/* Canvas Background & Hero Wrapper */
-.three-hero-bg-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  pointer-events: none;
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s ease;
-}
-
-.three-hero-bg-wrapper.hero-hidden {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-
-.three-hero-bg-wrapper.hero-visible {
-  opacity: 1 !important;
-  visibility: visible !important;
-}
-
+/* Unified Cosmic Starfield & Ambient Atmosphere */
 #three-starfield-canvas {
   position: fixed;
   top: 0;
@@ -42,63 +20,20 @@ section {
   height: 100%;
   z-index: -2;
   pointer-events: none;
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s ease;
 }
 
-#three-starfield-canvas.starfield-hidden {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-
-#three-starfield-canvas.starfield-visible {
-  opacity: 1 !important;
-  visibility: visible !important;
-}
-
-#webgl-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  pointer-events: none;
-}
-
-.bg-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom,
-      transparent 0%,
-      transparent 64%,
-      rgba(5, 5, 5, 0.32) 84%,
-      #050505 100%);
-  z-index: -1;
-  pointer-events: none;
-}
-
-/* A static, compositor-friendly sheen gives the hero its premium glow without
-   adding any work to the raymarch shader. It is deliberately off in Orbit Mode
-   because that mode already enables real bloom. */
-.bg-overlay::before {
+/* Subtle ambient cosmic atmospheric glows across all viewports */
+body::before {
   content: '';
-  position: absolute;
+  position: fixed;
   inset: 0;
-  background: radial-gradient(ellipse 48% 43% at 50% 42%,
-      rgba(255, 174, 73, 0.14) 0%,
-      rgba(255, 130, 28, 0.055) 36%,
-      transparent 72%);
-  mix-blend-mode: screen;
-  opacity: 0.9;
-  transition: opacity 0.35s ease;
-}
-
-.bg-overlay.orbit-active::before {
-  opacity: 0;
+  z-index: -3;
+  background: 
+    radial-gradient(circle 800px at 50% -20%, rgba(56, 189, 248, 0.06), transparent 80%),
+    radial-gradient(circle 600px at 85% 60%, rgba(139, 92, 246, 0.04), transparent 75%),
+    radial-gradient(circle 500px at 15% 75%, rgba(59, 130, 246, 0.04), transparent 70%),
+    #050508;
+  pointer-events: none;
 }
 
 /* Scroll Hints */

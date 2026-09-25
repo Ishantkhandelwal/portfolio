@@ -1,5 +1,5 @@
 import { useAudio } from '../hooks/useAudio';
-import dineshPhoto from '../assets/MYphoto.jpeg';
+import ishantAvatar from '../assets/avatar.webp';
 
 export default function EngineeringTelemetry() {
   const { playHoverSound, playClickSound } = useAudio();
@@ -10,7 +10,7 @@ export default function EngineeringTelemetry() {
       <div className="telemetry-header">
         <div className="telemetry-header-left">
           <span className="telemetry-live-dot" />
-          <span className="telemetry-hud-tag">Current Activity & Profiles</span>
+          <span className="telemetry-hud-tag">Current Activity &amp; Profiles</span>
         </div>
         <span className="telemetry-hud-status">Active in 2026 • Open for Opportunities</span>
       </div>
@@ -23,13 +23,13 @@ export default function EngineeringTelemetry() {
             <span className="card-badge">CURRENT FOCUS</span>
             <span className="card-indicator">Active</span>
           </div>
-          <h3 className="telemetry-card-title">AI-Augmented Systems</h3>
+          <h3 className="telemetry-card-title">Data Analytics &amp; Predictive ML</h3>
           <p className="telemetry-card-text text-gray">
-            Architecting decoupled full-stack systems, designing component and API contracts, and directing generative AI co-pilots for rapid code implementation.
+            Developing end-to-end predictive ML pipelines, Explainable AI (XAI) risk engines, and dynamic Power BI / Streamlit telemetry dashboards.
           </p>
           <div className="telemetry-meta-row text-gray">
             <span>CORE STACK:</span>
-            <span className="meta-highlight">Next.js, Cloudflare Pages, Gemini AI, Tailwind CSS</span>
+            <span className="meta-highlight">Python, Power BI, Scikit-learn, SQL, Pandas, Streamlit</span>
           </div>
         </div>
 
@@ -37,15 +37,15 @@ export default function EngineeringTelemetry() {
         <div className="telemetry-card hoverable">
           <div className="telemetry-card-top">
             <span className="card-badge">GITHUB CODE</span>
-            <span className="card-indicator">10+ Repositories</span>
+            <span className="card-indicator">Verified Projects</span>
           </div>
-          <h3 className="telemetry-card-title">System Architectures</h3>
+          <h3 className="telemetry-card-title">Data &amp; ML Repositories</h3>
           <p className="telemetry-card-text text-gray">
-            Over 10 public and private repositories—architected from concept to edge deployment, featuring ATS analyzers, WebSockets, and AI tools.
+            Explore end-to-end data analytics pipelines, multi-factor district crime rate forecasting, student dropout risk engines, and Power Query ETL workflows.
           </p>
           <div className="telemetry-actions-list">
             <a
-              href="https://github.com/DineshS36"
+              href="https://github.com/Ishantkhandelwal"
               target="_blank"
               rel="noopener noreferrer"
               className="telemetry-btn hoverable"
@@ -68,28 +68,32 @@ export default function EngineeringTelemetry() {
           {/* Clean LinkedIn Identity Preview */}
           <div className="linkedin-profile-preview">
             <img
-              src={dineshPhoto}
-              alt="Dinesh S"
+              src={ishantAvatar}
+              alt="Ishant Khandelwal"
               className="linkedin-preview-avatar"
+              loading="lazy"
+              decoding="async"
+              width="40"
+              height="40"
             />
             <div className="linkedin-preview-info">
               <div className="linkedin-preview-name">
-                <span>Dinesh S</span>
+                <span>Ishant Khandelwal</span>
                 <span className="linkedin-check" title="Verified Profile">✓</span>
               </div>
               <div className="linkedin-preview-role text-gray">
-                AI-Native Developer • 4th-Year AIML
+                Data Analyst • B.Tech CSE (LPU)
               </div>
             </div>
           </div>
 
           <p className="telemetry-card-text text-gray" style={{ marginBottom: '1rem' }}>
-            Open for full-stack engineering roles, AI-assisted development, and modern cloud deployment projects.
+            Open for Data Analyst, Machine Learning Engineer, Business Intelligence, and Data Science opportunities.
           </p>
 
           <div className="telemetry-actions-list">
             <a
-              href="https://www.linkedin.com/in/dinesh-s-173698390"
+              href="https://www.linkedin.com/in/ishantkhandelwal"
               target="_blank"
               rel="noopener noreferrer"
               className="telemetry-btn hoverable"
@@ -101,7 +105,7 @@ export default function EngineeringTelemetry() {
             </a>
 
             <a
-              href="https://wa.me/919345380487?text=Hi%20Dinesh,%20saw%20your%20portfolio%20and%20wanted%20to%20connect!"
+              href="https://wa.me/917850071684?text=Hi%20Ishant,%20saw%20your%20portfolio%20and%20wanted%20to%20connect!"
               target="_blank"
               rel="noopener noreferrer"
               className="telemetry-btn telemetry-btn-ping hoverable"

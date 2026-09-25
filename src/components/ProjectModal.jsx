@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
 import { stopLenis, startLenis } from '../hooks/useLenis';
+import ProjectLivePrototype from './ProjectLivePrototype';
 
 export default function ProjectModal({ open, onClose, project }) {
   const overlayRef = useRef(null);
@@ -10,7 +11,7 @@ export default function ProjectModal({ open, onClose, project }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'architecture' | 'prototype'
   const [prototypeDevice, setPrototypeDevice] = useState('desktop'); // 'desktop' | 'mobile'
-  const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [_iframeLoaded, setIframeLoaded] = useState(false);
 
   const images = project?.images ?? [];
 
@@ -164,7 +165,9 @@ export default function ProjectModal({ open, onClose, project }) {
             onClick={() => setActiveTab('prototype')}
           >
             <span className="tab-number">03</span>
-            <span className="tab-label">LIVE PROTOTYPE</span>
+            <span className="tab-label">
+              {exploreUrl && !exploreUrl.includes('github.com') ? 'LIVE PROTOTYPE' : 'GITHUB REPOSITORY'}
+            </span>
           </button>
         </div>
 
@@ -178,6 +181,8 @@ export default function ProjectModal({ open, onClose, project }) {
                   src={activeImage}
                   alt={`${project.title} screenshot ${activeIndex + 1}`}
                   className="project-modal-image"
+                  loading="lazy"
+                  decoding="async"
                 />
                 {images.length > 1 ? (
                   <>
@@ -213,7 +218,7 @@ export default function ProjectModal({ open, onClose, project }) {
                       onClick={() => setActiveIndex(idx)}
                       aria-label={`Show image ${idx + 1}`}
                     >
-                      <img src={src} alt="" />
+                      <img src={src} alt="" loading="lazy" decoding="async" />
                     </button>
                   ))}
                 </div>
@@ -392,7 +397,9 @@ export default function ProjectModal({ open, onClose, project }) {
                   <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                   <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                 </svg>
-                <span className="address-text">{exploreUrl || 'https://production-preview.internal'}</span>
+                <span className="address-text">
+                  {githubUrl || exploreUrl || 'https://github.com/Ishantkhandelwal'}
+                </span>
               </div>
 
               <div className="prototype-controls">
@@ -410,15 +417,15 @@ export default function ProjectModal({ open, onClose, project }) {
                 >
                   Mobile (390px)
                 </button>
-                {exploreUrl && (
+                {githubUrl && (
                   <a
-                    href={exploreUrl}
+                    href={githubUrl}
                     target="_blank"
                     rel="noreferrer"
                     className="launch-external-btn hoverable"
-                    title="Open live site in new tab"
+                    title="Open GitHub source in new tab"
                   >
-                    ↗ Open Tab
+                    ↗ GitHub Source
                   </a>
                 )}
               </div>
@@ -426,37 +433,7 @@ export default function ProjectModal({ open, onClose, project }) {
 
             {/* Prototype Canvas Viewport */}
             <div className={`prototype-viewport-container device-${prototypeDevice}`}>
-              {exploreUrl && exploreUrl !== '#' ? (
-                <>
-                  {!iframeLoaded && (
-                    <div className="prototype-loading-overlay font-mono">
-                      <div className="prototype-spinner"></div>
-                      <span>Connecting to secure live preview...</span>
-                    </div>
-                  )}
-                  <iframe
-                    src={exploreUrl}
-                    title={`${project.title} Live Prototype`}
-                    className="prototype-iframe"
-                    onLoad={() => setIframeLoaded(true)}
-                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                  />
-                </>
-              ) : (
-                <div className="prototype-empty-state">
-                  <p className="font-mono uppercase text-gray">Production environment undergoing private deployment.</p>
-                  {githubUrl && (
-                    <a
-                      href={githubUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="project-modal-action-btn hoverable font-mono uppercase"
-                    >
-                      Inspect Source on GitHub
-                    </a>
-                  )}
-                </div>
-              )}
+              <ProjectLivePrototype project={project} device={prototypeDevice} />
             </div>
           </div>
         )}

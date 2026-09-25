@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAudio } from '../hooks/useAudio';
 import {
   WebArchitectureCanvas,
@@ -16,74 +16,74 @@ export default function Timeline() {
   const epochs = [
     {
       epoch: '01',
-      date: 'DEC 2025 – MAR 2026',
+      date: 'AUG 2024 – PRESENT',
       stageLabel: 'STAGE 01',
-      category: 'THE SPARK',
-      dockLabel: 'FOUNDATIONS',
-      title: 'Web Foundations & Core Logic',
-      headline: 'HTML5, CSS3 & Programming Basics',
+      category: 'ACADEMIC FOUNDATION',
+      dockLabel: 'B.TECH CSE',
+      title: 'Computer Science & Engineering Foundations',
+      headline: 'Lovely Professional University (Phagwara)',
       summary:
-        'Started exploring programming logic and web development in December 2025. Mastered core frontend structure with HTML5, CSS3, and modern CSS, while building foundational problem-solving skills in Java, JavaScript, and Python.',
+        'Pursuing B.Tech Computer Science and Engineering at Lovely Professional University. Building deep competencies in Object-Oriented Programming (Java, C++), Data Structures, Relational Database Management Systems (DBMS), and statistical computation.',
       metrics: [
-        { label: 'Timeline', value: 'Dec 2025 – Mar 2026' },
-        { label: 'Focus', value: 'Web Foundations' },
-        { label: 'Core Tools', value: 'HTML, CSS & Java' }
+        { label: 'Institution', value: 'LPU, Phagwara' },
+        { label: 'Degree', value: 'B.Tech CSE' },
+        { label: 'Core Focus', value: 'OOP, DBMS & Data' }
       ],
-      techStack: ['HTML5', 'CSS3', 'Tailwind CSS', 'JavaScript', 'Java', 'Git'],
+      techStack: ['Python', 'Java (OOP)', 'C++', 'SQL', 'DBMS', 'Data Structures'],
       Visualizer: WebArchitectureCanvas
     },
     {
       epoch: '02',
-      date: '2026 • JUNE (5-DAY SPRINT)',
+      date: '2026 • MAY',
       stageLabel: 'STAGE 02',
-      category: 'REAL-TIME SPRINT',
-      dockLabel: '5-DAY SPRINT',
-      title: 'ChatUp: Real-Time Messaging App',
-      headline: 'Architected & Shipped in 5 Days',
+      category: 'PREDICTIVE EDA',
+      dockLabel: 'CRIME FORECAST',
+      title: 'Crime Against Women in India: Analysis & Prediction',
+      headline: 'District-Level Predictive Regression Model',
       summary:
-        'Architected and delivered ChatUp in an intensive 5-day build sprint in June 2026. Designed the full-duplex WebSocket architecture and MongoDB schemas, directing AI code generation to implement Socket.io channels with sub-25ms response times.',
+        'Engineered a predictive regression model in Python and Scikit-learn analyzing district-level crime trends across Indian states. Executed rigorous multi-factor data cleaning with Pandas and NumPy, outlier removal, missing value imputation, and correlation heatmap synthesis.',
       metrics: [
-        { label: 'Sprint Speed', value: '5 Days (June 2026)' },
-        { label: 'Latency', value: '< 25ms Ping' },
-        { label: 'Architecture', value: 'Socket.io + MongoDB' }
+        { label: 'Factors', value: '7 Core Predictors' },
+        { label: 'R² Correlation', value: '0.864' },
+        { label: 'Coverage', value: 'All States & UTs' }
       ],
-      techStack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Socket.io', 'JWT'],
+      techStack: ['Python', 'Scikit-learn', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn'],
       Visualizer: ChatUpSocketStreamCanvas
     },
     {
       epoch: '03',
-      date: '2026 • JUNE (3-DAY SPRINT)',
+      date: '2026 • JUNE',
       stageLabel: 'STAGE 03',
-      category: 'APPLIED GENAI SPRINT',
-      dockLabel: '3-DAY SPRINT',
-      title: 'Roasting AI: LLM Generator',
-      headline: 'Engineered & Shipped in 3 Days',
+      category: 'PREDICTIVE ML & XAI',
+      dockLabel: 'DROPOUT AI',
+      title: 'AI Dropout Risk Intelligence System',
+      headline: 'Real-Time Dropout Risk Classification & XAI',
       summary:
-        'Engineered and deployed Roasting AI in a rapid 3-day sprint in June 2026. Structured multi-shot comedic prompt schemas for Google Gemini API, implemented streaming token responses in React, and built resilient fallback logic for instant comedic roasts.',
+        'Engineered an end-to-end machine learning predictive system using Python, Scikit-learn, and Streamlit to classify student dropout risks with real-time probability scoring. Integrated Explainable AI (XAI) feature importance and dynamic SVG risk gauges diagnosing attendance, marks, and assignments.',
       metrics: [
-        { label: 'Sprint Speed', value: '3 Days (June 2026)' },
-        { label: 'AI Engine', value: 'Google Gemini API' },
-        { label: 'Stream Speed', value: '< 540ms TTFB' }
+        { label: 'Precision', value: '88.5% Accuracy' },
+        { label: 'Interface', value: 'Interactive Streamlit' },
+        { label: 'Explainability', value: 'XAI Risk Drivers' }
       ],
-      techStack: ['React.js', 'Node.js', 'Gemini API', '@google/generative-ai', 'Tailwind CSS'],
+      techStack: ['Python', 'Scikit-learn', 'Streamlit', 'Pandas', 'XAI', 'NumPy'],
       Visualizer: RoastingAITokenStreamCanvas
     },
     {
       epoch: '04',
-      date: '2026 • PRODUCTION SAAS',
+      date: '2026 • JULY',
       stageLabel: 'STAGE 04',
-      category: 'CLOUD & EDGE SAAS',
-      dockLabel: 'PROD SAAS',
-      title: 'AI Resume Builder & Cloudflare Edge',
-      headline: 'Decoupled Next.js SaaS & OAuth 2.0',
+      category: 'BI & TELEMETRY',
+      dockLabel: 'FRAUD BI',
+      title: 'Digital Payment Fraud Detection Dashboard',
+      headline: 'Power BI, DAX & Power Query ETL Pipelines',
       summary:
-        'Architected and shipped an edge-deployed SaaS platform in 2026. Decoupled the Next.js presentation layer on Cloudflare Pages from an Express/PostgreSQL backend API, securing auth via Google OAuth 2.0 PKCE and directing Gemini AI for real-time ATS resume scoring.',
+        'Designed an interactive Power BI telemetry dashboard analyzing 7,500+ digital transactions across Indian cities to detect suspicious fraud patterns. Built automated ETL workflows in Power Query, custom DAX measures, IP risk scoring, and real-time KPI alerts across UPI, Cards, and NetBanking.',
       metrics: [
-        { label: 'Edge TTFB', value: '< 85ms Latency' },
-        { label: 'Security', value: 'Google OAuth 2.0' },
-        { label: 'Deployment', value: 'Cloudflare Pages' }
+        { label: 'Dataset', value: '7,500+ Transactions' },
+        { label: 'Dataflow', value: 'Automated Power Query' },
+        { label: 'Telemetry', value: 'UPI / Cards / NetB' }
       ],
-      techStack: ['Next.js', 'Cloudflare Pages', 'PostgreSQL', 'Prisma', 'Google OAuth 2.0', 'Express.js'],
+      techStack: ['Power BI', 'DAX Measures', 'Power Query (M)', 'Data Modeling', 'Excel'],
       Visualizer: EdgeResumeATSParserCanvas
     }
   ];
