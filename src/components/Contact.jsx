@@ -252,9 +252,10 @@ export default function Contact() {
                   <div
                     className="paper-rocket-sideways-wrap"
                     style={{
-                      transform: `translate(${((launchProgress / 100) * 440) - 220}px, ${
-                        Math.sin((launchProgress / 100) * Math.PI * 3) * 25
-                      }px) rotate(${Math.cos((launchProgress / 100) * Math.PI * 3) * 11 - 2}deg)`
+                      left: '50%',
+                      transform: `translate(calc(-50% + ${((launchProgress / 100) - 0.5) * 75}cqw), ${
+                        Math.sin((launchProgress / 100) * Math.PI * 3) * 18
+                      }px) rotate(${Math.cos((launchProgress / 100) * Math.PI * 3) * 10 - 2}deg)`
                     }}
                   >
                     <svg viewBox="0 0 100 48" fill="none" className="space-rocket-side-svg">

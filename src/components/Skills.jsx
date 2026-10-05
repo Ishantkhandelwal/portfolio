@@ -144,23 +144,47 @@ export default function Skills() {
     setActiveCardIndex(index);
   }, [angleStep, playClickSound]);
 
+  const startYRef = useRef(0);
+  const isHorizontalDragRef = useRef(false);
+
   // Interactive Drag / Swipe controls
   const handlePointerDown = (e) => {
     isDraggingRef.current = true;
-    startXRef.current = e.clientX || (e.touches && e.touches[0]?.clientX) || 0;
+    isHorizontalDragRef.current = false;
+    const clientX = e.clientX || (e.touches && e.touches[0]?.clientX) || 0;
+    const clientY = e.clientY || (e.touches && e.touches[0]?.clientY) || 0;
+    startXRef.current = clientX;
+    startYRef.current = clientY;
     startAngleRef.current = angleRef.current;
   };
 
   const handlePointerMove = (e) => {
     if (!isDraggingRef.current) return;
     const clientX = e.clientX || (e.touches && e.touches[0]?.clientX) || 0;
+    const clientY = e.clientY || (e.touches && e.touches[0]?.clientY) || 0;
     const deltaX = clientX - startXRef.current;
-    angleRef.current = (startAngleRef.current - deltaX * 0.32 + 3600) % 360;
-    setRotationAngle(angleRef.current);
+    const deltaY = clientY - startYRef.current;
+
+    // Detect if user is intentionally swiping horizontally vs scrolling the page vertically
+    if (!isHorizontalDragRef.current) {
+      if (Math.abs(deltaX) > Math.abs(deltaY) + 5) {
+        isHorizontalDragRef.current = true;
+      } else if (Math.abs(deltaY) > 7) {
+        // User is scrolling the page vertically - release lock
+        isDraggingRef.current = false;
+        return;
+      }
+    }
+
+    if (isHorizontalDragRef.current) {
+      angleRef.current = (startAngleRef.current - deltaX * 0.32 + 3600) % 360;
+      setRotationAngle(angleRef.current);
+    }
   };
 
   const handlePointerUp = () => {
     isDraggingRef.current = false;
+    isHorizontalDragRef.current = false;
   };
 
   // Wheel interaction: scroll wheel rotates the 360 cylinder

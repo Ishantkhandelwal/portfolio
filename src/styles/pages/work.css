@@ -160,12 +160,39 @@
 }
 
 @media (max-width: 768px) {
+  .work-page-section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    overflow-x: clip;
+  }
+
+  .work-header {
+    margin-bottom: 2.25rem;
+  }
+
   .work-grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2rem;
+  }
+
+  .project-card {
+    aspect-ratio: 16/11;
   }
 
   .project-card:nth-child(even) {
     transform: translateY(0);
+  }
+
+  .project-info {
+    padding: 1.25rem;
+  }
+
+  .project-title {
+    font-size: 1.4rem;
+  }
+
+  .project-category {
+    font-size: 0.68rem;
+    letter-spacing: 1px;
   }
 }

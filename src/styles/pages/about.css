@@ -95,14 +95,26 @@
 }
 
 @media (max-width: 768px) {
+  .about-intro-section {
+    padding-top: 5rem;
+    padding-bottom: 2.5rem;
+  }
+
   .about-grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2.5rem;
+  }
+
+  .about-text {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
   }
 
   .abstract-box {
-    max-width: 380px;
-    height: 420px;
+    max-width: 100%;
+    width: 100%;
+    height: clamp(280px, 78vw, 400px);
   }
 }
 

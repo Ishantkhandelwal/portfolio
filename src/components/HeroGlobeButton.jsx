@@ -77,7 +77,15 @@ export default function HeroGlobeButton() {
       { theta: (3 * Math.PI) / 2, phi: 0.2, speed: -0.015 }
     ];
 
+    let isVisible = true;
+    let observer = null;
+
     const render = () => {
+      if (!isVisible) {
+        animationFrameId = null;
+        return;
+      }
+
       ctx.clearRect(0, 0, size, size);
 
       // Smooth acceleration on hover
@@ -151,7 +159,17 @@ export default function HeroGlobeButton() {
       animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    if (typeof IntersectionObserver !== 'undefined') {
+      observer = new IntersectionObserver(([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible && !animationFrameId) {
+          animationFrameId = requestAnimationFrame(render);
+        }
+      }, { threshold: 0.05 });
+      observer.observe(canvas);
+    } else {
+      render();
+    }
 
     // Hook speed adjustments to hover state
     const updateTargetSpeed = (fast) => {
@@ -165,9 +183,10 @@ export default function HeroGlobeButton() {
     canvas.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
+      if (observer) observer.disconnect();
       canvas.removeEventListener('mouseenter', handleMouseEnter);
       canvas.removeEventListener('mouseleave', handleMouseLeave);
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
     };
   }, []);
 

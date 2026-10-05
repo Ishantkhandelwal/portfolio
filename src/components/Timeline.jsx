@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useAudio } from '../hooks/useAudio';
 import {
   WebArchitectureCanvas,
@@ -129,6 +129,28 @@ export default function Timeline() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleNext, handlePrev]);
 
+  const touchStartXRef = useRef(0);
+  const touchStartYRef = useRef(0);
+
+  const handleTouchStart = (e) => {
+    setIsPaused(true);
+    touchStartXRef.current = e.touches[0].clientX;
+    touchStartYRef.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e) => {
+    const deltaX = e.changedTouches[0].clientX - touchStartXRef.current;
+    const deltaY = e.changedTouches[0].clientY - touchStartYRef.current;
+    if (Math.abs(deltaX) > Math.abs(deltaY) + 15 && Math.abs(deltaX) > 40) {
+      if (deltaX < 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
+    setTimeout(() => setIsPaused(false), 3000);
+  };
+
   return (
     <section className="container timeline-section" id="experience">
       {/* Aligned Section Header matching #about, #work, #skills */}
@@ -166,6 +188,8 @@ export default function Timeline() {
         className="timeline-stage-wrapper"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         <button
           type="button"

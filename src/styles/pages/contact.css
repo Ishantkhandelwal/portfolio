@@ -459,6 +459,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  container-type: inline-size;
+  overflow: hidden;
 }
 
 /* 3. Sideways Paper Rocket with Wave Undulation */
@@ -618,4 +620,69 @@
   0% { transform: scale(0.3); opacity: 0; }
   70% { transform: scale(1.15); opacity: 1; }
   100% { transform: scale(1); opacity: 1; }
+}
+
+/* ==========================================================================
+   Mobile Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 768px) {
+  .contact-page-section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    overflow-x: clip;
+  }
+
+  .contact-header.centered {
+    margin-bottom: 2.25rem;
+  }
+
+  .cosmic-monolith-card {
+    padding: 1.5rem 1.15rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .sideways-flight-arena {
+    height: 130px;
+    overflow: hidden;
+  }
+
+  .paper-rocket-sideways-wrap {
+    width: 76px;
+    height: 38px;
+  }
+
+  .field-input {
+    padding: 0.85rem 0.95rem;
+    font-size: 0.9rem;
+  }
+
+  .field-textarea {
+    min-height: 100px;
+  }
+
+  .comms-capsule {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: 0.85rem;
+    padding: 1.15rem;
+  }
+
+  .comms-channel-info {
+    align-items: center;
+  }
+
+  .comms-email {
+    font-size: 0.85rem;
+    word-break: break-all;
+  }
+
+  .copy-signal-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+  }
 }

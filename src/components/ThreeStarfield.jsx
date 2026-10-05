@@ -69,12 +69,13 @@ export default function ThreeStarfield() {
       return;
     }
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+    const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.0 : 1.5);
     renderer.setPixelRatio(dpr);
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     // 1. Create 3D Static/Twinkling Stars
-    const starCount = 1400;
+    const starCount = isMobile ? 750 : 1400;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(starCount * 3);
     const colors = new Float32Array(starCount * 3);

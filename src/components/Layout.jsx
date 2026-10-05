@@ -40,15 +40,30 @@ export default function Layout({ isPreloaderDone }) {
       { opacity: 1, duration: 0.45, ease: 'power2.out' }
     );
 
-    // Initialize reveals synchronously on next animation frame before paint
+    // Initialize reveals synchronously and schedule a settling refresh
+    const isMobile =
+      typeof window !== 'undefined' &&
+      (window.innerWidth <= 768 || window.matchMedia('(pointer: coarse)').matches);
+
+    let refreshTimer = null;
+
     const animFrameId = requestAnimationFrame(() => {
       ScrollTrigger.refresh();
 
       // Hero Elements (only run if on Hero page and elements exist)
       if (isHeroPage) {
         gsap.fromTo('.hero-elem',
-          { y: 50, opacity: 0, scale: 0.95 },
-          { y: 0, opacity: 1, scale: 1, duration: 1.2, stagger: 0.2, ease: 'power4.out', delay: 0.2 }
+          { y: isMobile ? 30 : 50, opacity: 0, scale: 0.96 },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: isMobile ? 0.8 : 1.1,
+            stagger: isMobile ? 0.12 : 0.2,
+            ease: 'power3.out',
+            delay: 0.15,
+            clearProps: 'transform,opacity,scale'
+          }
         );
       }
 
@@ -62,7 +77,7 @@ export default function Layout({ isPreloaderDone }) {
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: elem,
-              start: 'top 92%',
+              start: isMobile ? 'top 96%' : 'top 92%',
               once: true
             }
           });
@@ -70,12 +85,12 @@ export default function Layout({ isPreloaderDone }) {
           // 1. Masked Word Slide-Up with silky responsive ease
           if (words.length > 0) {
             tl.fromTo(words,
-              { yPercent: 105, opacity: 0 },
+              { yPercent: isMobile ? 80 : 105, opacity: 0 },
               {
                 yPercent: 0,
                 opacity: 1,
-                duration: 0.8,
-                stagger: 0.07,
+                duration: isMobile ? 0.65 : 0.8,
+                stagger: isMobile ? 0.05 : 0.07,
                 ease: 'power3.out',
                 clearProps: 'all'
               }
@@ -94,11 +109,11 @@ export default function Layout({ isPreloaderDone }) {
               {
                 scaleX: 1,
                 opacity: 1,
-                duration: 0.75,
+                duration: isMobile ? 0.6 : 0.75,
                 ease: 'power2.out',
                 clearProps: 'all'
               },
-              words.length > 0 ? '-=0.4' : 0
+              words.length > 0 ? '-=0.35' : 0
             );
           }
 
@@ -106,31 +121,31 @@ export default function Layout({ isPreloaderDone }) {
           const trailingText = elem.querySelectorAll('.about-text, .skill-list, .contact-lead, .beacon-eyebrow');
           if (trailingText.length > 0) {
             tl.fromTo(trailingText,
-              { y: 25, opacity: 0 },
+              { y: isMobile ? 18 : 25, opacity: 0 },
               {
                 y: 0,
                 opacity: 1,
-                duration: 0.75,
-                stagger: 0.07,
+                duration: isMobile ? 0.6 : 0.75,
+                stagger: 0.06,
                 ease: 'power3.out',
                 clearProps: 'all'
               },
-              '-=0.35'
+              '-=0.3'
             );
           }
         } else {
           // General Card Containers (Telemetry Deck, Monolith, Abstract Box, etc.)
           gsap.fromTo(elem,
-            { y: 35, opacity: 0 },
+            { y: isMobile ? 24 : 35, opacity: 0 },
             {
               y: 0,
               opacity: 1,
-              duration: 0.9,
+              duration: isMobile ? 0.7 : 0.9,
               ease: 'power3.out',
               clearProps: 'all',
               scrollTrigger: {
                 trigger: elem,
-                start: 'top 90%',
+                start: isMobile ? 'top 94%' : 'top 90%',
                 once: true
               }
             }
@@ -141,24 +156,32 @@ export default function Layout({ isPreloaderDone }) {
       // Staggered Work Card Reveals specifically for the Work page
       if (document.querySelector('#work')) {
         gsap.fromTo('.gsap-work-card',
-          { y: 100, opacity: 0 },
+          { y: isMobile ? 50 : 80, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 1,
-            stagger: 0.2,
+            duration: isMobile ? 0.7 : 0.9,
+            stagger: isMobile ? 0.12 : 0.18,
             ease: 'power3.out',
+            clearProps: 'all',
             scrollTrigger: {
               trigger: '#work',
-              start: 'top 60%'
+              start: isMobile ? 'top 92%' : 'top 80%',
+              once: true
             }
           }
         );
       }
+
+      // Settling refresh after images and webfonts render
+      refreshTimer = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 300);
     });
 
     return () => {
       cancelAnimationFrame(animFrameId);
+      if (refreshTimer) clearTimeout(refreshTimer);
       // Clean up only reveal triggers created here; child components manage their own triggers
       ScrollTrigger.getAll().forEach(t => {
         if (

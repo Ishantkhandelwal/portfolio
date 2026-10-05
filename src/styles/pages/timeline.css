@@ -381,32 +381,75 @@
 }
 
 @media (max-width: 640px) {
+  .timeline-section {
+    padding-top: 2.5rem;
+    padding-bottom: 5rem;
+    overflow-x: clip;
+  }
+
   .timeline-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .timeline-header-meta {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .timeline-jump-strip {
+    flex-wrap: wrap;
   }
 
   .timeline-stage-wrapper {
     position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .timeline-side-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    font-size: 1.15rem;
+    z-index: 10;
   }
 
   .timeline-arrow-prev {
-    left: -12px;
+    left: 6px;
   }
 
   .timeline-arrow-next {
-    right: -12px;
+    right: 6px;
+  }
+
+  .timeline-stage-card {
+    padding: 1.35rem 1rem;
+    border-radius: 14px;
+    width: 100%;
+  }
+
+  .stage-title {
+    font-size: 1.25rem;
+  }
+
+  .stage-summary {
+    font-size: 0.85rem;
+    line-height: 1.55;
   }
 
   .stage-metrics-grid {
     grid-template-columns: 1fr;
     gap: 0.6rem;
+  }
+
+  .timeline-simulation-pane {
+    min-height: 220px;
   }
 }

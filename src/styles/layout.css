@@ -3,12 +3,29 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
+  width: 100%;
 }
 
 section {
   padding: 8rem 0;
   position: relative;
   z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.25rem;
+  }
+
+  section {
+    padding: 5rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1rem;
+  }
 }
 
 /* Unified Cosmic Starfield & Ambient Atmosphere */

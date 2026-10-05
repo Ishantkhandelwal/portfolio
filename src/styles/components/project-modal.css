@@ -1412,6 +1412,10 @@
     padding: 1.25rem 1.25rem 1rem;
   }
 
+  .project-modal-title {
+    font-size: 1.35rem;
+  }
+
   .project-modal-tab-bar {
     padding: 0.35rem 1rem;
   }

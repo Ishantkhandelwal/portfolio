@@ -79,10 +79,15 @@ export default function usePageTransitions({ isActive }) {
   useEffect(() => {
     if (!isActive) return;
 
+    const isMobile =
+      typeof window !== 'undefined' &&
+      (window.matchMedia('(max-width: 768px)').matches ||
+        window.matchMedia('(pointer: coarse)').matches);
+
     observerRef.current = Observer.create({
-      type: 'wheel,touch,pointer',
+      type: isMobile ? 'wheel' : 'wheel,pointer',
       wheelSpeed: -1,
-      tolerance: 45,
+      tolerance: 60,
       preventDefault: false, // Allow normal internal scrolling inside page content
       onUp: () => {
         // onUp = user scrolled down / swiped up (intent to move forward)
